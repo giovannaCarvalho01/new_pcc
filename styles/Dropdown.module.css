@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  position: relative;
+  max-width: 100%;
+  width: 90%;
+  margin-top: 10px;
+  justify-content: center;
+  /* margin: 20px auto; */
+}
+
+.dropdownButton {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%; /* Coloca o dropdown abaixo do botão */
+  left: 50%; /* Alinha o dropdown ao centro */
+  transform: translateX(-50%); /* Ajusta para garantir que ele fique perfeitamente centralizado */
+  width: 90%; /* Define a largura do dropdown para ser a mesma do botão */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  z-index: 10;
+  max-height: 100px; /* Adiciona limite de altura */
+  overflow-y: auto; /* Habilita barra de rolagem se necessário */
+  scrollbar-color: #ccc #f9f9f9; /* Opcional: personaliza a aparência */
+}
+
+.dropdownItem {
+  /* padding: 10px; */
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  color: black;
+  font-size: 10px;
+  text-align: center;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownButton::placeholder {
+  font-size: 11px; /* Tamanho do placeholder ajustado */
+  /*color: #aaa; /* Cor do placeholder ajustada para ser mais discreta */
+  color: black; /* Cor do placeholder ajustada para ser mais discreta */
+
+}

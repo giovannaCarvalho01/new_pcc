@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  position: relative;
+  max-width: 100%;
+  width: 90%;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+/* Container do input e do ícone de borracha */
+.inputContainer {
+  display: flex; /* Organiza o input e o ícone em linha */
+  width: 100%; /* Garante que ocupe toda a largura do container */
+  position: relative;
+  justify-content: center;
+}
+
+.input {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 10px; /* Tamanho de fonte ajustado para melhor legibilidade */
+  box-sizing: border-box; /* Garante que o padding não afete a largura total */
+}
+
+.input::placeholder {
+  font-size: 11px; /* Tamanho do placeholder ajustado */
+  color: #aaa; /* Cor do placeholder ajustada para ser mais discreta */
+}
+
+/* Estilo do ícone de borracha */
+.clearIcon {
+  position: absolute;
+  right: -8px; /* Coloca o ícone 25px à direita do input */
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza o ícone verticalmente */
+  font-size: 15px; /* Tamanho do ícone */
+  cursor: pointer; /* Indica que o ícone é clicável */
+  color: #888; /* Cor do ícone */
+  z-index: 1; /* Garante que o ícone fique sobre o campo de entrada */
+}
+
+.clearIcon:hover {
+  color: #333; /* Muda a cor quando o usuário passa o mouse sobre o ícone */
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 100%; /* Coloca o dropdown abaixo do campo de entrada */
+  left: 50%; /* Alinha o dropdown ao centro */
+  transform: translateX(-50%); /* Ajusta para garantir que ele fique perfeitamente centralizado */
+  width: 90%; /* Define a largura do dropdown para ser a mesma do input */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ddd;
+  border-top: none;
+  background-color: #fff;
+  z-index: 10;
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: center;
+  max-height: 100px; /* Define a altura máxima */
+  overflow-y: auto; /* Habilita a barra de rolagem vertical */
+  scrollbar-width: thin; /* Opcional: para navegadores que suportam */
+  scrollbar-color: #ccc #f9f9f9; /* Opcional: personaliza a aparência */
+}
+
+.dropdownItem {
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}
