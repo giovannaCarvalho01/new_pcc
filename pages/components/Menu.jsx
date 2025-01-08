@@ -5,7 +5,7 @@ export default function Menu() {
     <nav className="menu">
       <Link href="/home">Dashboards</Link>
       <Link href="/download">Downloads</Link>
-      <Link href="/comparativo">Comparativos</Link>
+      <Link href="/comparativos">Comparativos</Link>
     </nav>
   );
 }
