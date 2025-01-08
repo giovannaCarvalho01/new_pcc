@@ -1,6 +1,6 @@
 import PieChartComponent from "../components/PieChart"
 // import PieChart from "../components/PieChart"
-import LineChartComponent from "../components/LineChart"
+import LineChart from "../components/LineChart"
 // import LineChart from "../components/LineChart"
 
   
@@ -33,8 +33,8 @@ import LineChartComponent from "../components/LineChart"
           <PieChartComponent data={datas} /> 
           <PieChartComponent data={datas} /> 
         </div>
-        <div className="inferior">
-          <LineChartComponent data={lineData} />
+        <div className="inferior" style={{ width: "100%"}} >
+          <LineChart/>
         </div>
       </div>
     )

@@ -1,51 +1,59 @@
-// export default function LineChart(){
-//     return(
-//         <div className="lineChart">
-//             lineChart
-//         </div>
-//     )
-// }
+// components/LineChart.js
+import React from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-import React, { useEffect, useState } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+// Registrar os componentes necessários do Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-// Dados de exemplo para o gráfico de linha
-const data = [
-  { name: 'Jan', value: 4000 },
-  { name: 'Feb', value: 3000 },
-  { name: 'Mar', value: 2000 },
-  { name: 'Apr', value: 2780 },
-  { name: 'May', value: 1890 },
-  { name: 'Jun', value: 2390 },
-  { name: 'Jul', value: 3490 },
-]
+const LineChart = () => {
+  // Dados para o gráfico
+  const data = {
+    labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+    datasets: [
+      {
+        label: "Média de Notas",
+        data: [30, 45, 60, 40, 70, 80],
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        tension: 0.3, // Curvatura da linha
+      },
+    ],
+  };
 
-export default function LineChartComponent({ data }) {
-  const [clientData, setClientData] = useState(null);
+  // Opções para o gráfico
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Permite ajustar o gráfico ao tamanho do container
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Gráfico de Linhas",
+      },
+    },
+  };
 
-  useEffect(() => {
-    if (data) {
-      setClientData(data);
-    }
-  }, [data]);
+  return <Line data={data} options={options} />;
+};
 
-  if (!clientData) {
-    return <div>Carregando...</div>;
-  }
-
-  return (
-    <div style={{ textAlign: "center" }}>
-      <h4>Line Chart</h4>
-      <ResponsiveContainer width="100%" height={180}>
-        <LineChart data={clientData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
+export default LineChart;
