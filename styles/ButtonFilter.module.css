@@ -1,0 +1,10 @@
+.stlButton {
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  border-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
