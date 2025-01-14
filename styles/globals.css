@@ -126,3 +126,8 @@ a {
   margin: 10px;
 }
 /* LineChart Fim */
+
+.btnFiltrar.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

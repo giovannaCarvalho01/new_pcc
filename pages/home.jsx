@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
 import Menu from "../components/Menu";
 
-export default function home() {
+export default function Home() {
   const [filters, setFilters] = useState(null); // Armazena os filtros aplicados
 
   const handleFilterApply = (appliedFilters) => {
@@ -16,8 +16,8 @@ export default function home() {
         <Menu />
       </div>
       <div className="principal">
-        <Sidebar onFilterApply={handleFilterApply} />
-        <Main filters={filters} />
+        <Sidebar onFilterApply={handleFilterApply} /> {/* Passa a função onFilterApply */}
+        <Main filters={filters} /> {/* Passa o estado filters para o Main */}
       </div>
     </div>
   );
