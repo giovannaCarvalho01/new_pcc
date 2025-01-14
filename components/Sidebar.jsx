@@ -1,6 +1,7 @@
-import { useState } from "react"; // Importação do hook useState
-import DropdownFilter from "./DropdownFilter"; // Assumindo que você tem esses componentes
-import ButtonFilter from "./ButtonFilter";
+// components/Sidebar.js
+import { useState } from "react";
+import DropdownFilter from "./DropdownFilter"; // Suponho que você tenha esse componente
+import ButtonFilter from "./ButtonFilter"; // Importando o novo componente
 
 export default function Sidebar({ onFilterApply }) {
   const [anoSelecionado, setAnoSelecionado] = useState(null);
@@ -90,13 +91,12 @@ export default function Sidebar({ onFilterApply }) {
           queryParams={`coluna=dsc_grp&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}&cod_ies=${iesSelecionado}`}
         />
       )}
-      <button
-        className={`btnFiltrar ${!isFormValid() ? "disabled" : ""}`}
+      
+      {/* Usando o ButtonFilter */}
+      <ButtonFilter
+        isFormValid={isFormValid()}
         onClick={handleFiltrar}
-        disabled={!isFormValid()}
-      >
-        Filtrar
-      </button>
+      />
     </div>
   );
 }

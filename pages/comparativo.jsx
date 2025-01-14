@@ -10,7 +10,7 @@ export default function comparativo(){
             </div>
             <div className="principal">
                 <Sidebar></Sidebar>
-
+                Em construção
             </div>
         </div>
     )
