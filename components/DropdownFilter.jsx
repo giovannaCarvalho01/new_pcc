@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import styles from "../styles/Dropdown.module.css"; // Arquivo CSS modular
 
 export default function DropdownFilter({ placeholder, queryParams, coluna, onSelect }) {
-  const [isOpen, setIsOpen] = useState(false); // Controle de abertura do dropdown
-  const [selectedItem, setSelectedItem] = useState(null); // Item selecionado
-  const [items, setItems] = useState([]); // Lista de itens a ser carregada da API
-  const [loading, setLoading] = useState(false); // Estado de carregamento
-  const [error, setError] = useState(null); // Estado de erro
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Parte fixa dos endpoints
   const baseEndpoint = "http://localhost:3001/filter?";
   const endpointAno = "http://localhost:3001/anos";
 
@@ -17,7 +16,6 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
       setLoading(true);
       setError(null);
 
-      // Escolhe o endpoint com base na prop `coluna`
       const fullEndpoint =
         coluna === "ano" ? endpointAno : `${baseEndpoint}${queryParams}`;
 
@@ -27,11 +25,7 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
           throw new Error(`Erro ao buscar os dados: ${response.statusText}`);
         }
         const data = await response.json();
-
-        // Ajusta a estrutura dependendo do endpoint
-        const parsedItems = coluna === "ano" ? data.map((item) => item.ano) : data;
-
-        setItems(parsedItems); // Atualiza os itens
+        setItems(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -40,26 +34,24 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
     };
 
     fetchItems();
-  }, [queryParams, coluna]); // Recarrega os dados quando `queryParams` ou `coluna` mudar
+  }, [queryParams, coluna]);
 
-  const handleSelect = (item) => {
-    setSelectedItem(item); // Define o item selecionado
-    setIsOpen(false); // Fecha o dropdown
+  const handleSelect = (value) => {
+    setSelectedItem(value);
+    setIsOpen(false);
     if (onSelect) {
-      onSelect(item); // Retorna o valor selecionado para o componente pai
+      onSelect(value);
     }
   };
 
   return (
     <div className={styles.container}>
-      {/* Elemento principal */}
       <button
         className={styles.dropdownButton}
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedItem ? selectedItem : placeholder}
       </button>
-      {/* Dropdown */}
       {isOpen && (
         <div className={styles.dropdown}>
           {loading && <div className={styles.loading}>Carregando...</div>}
@@ -69,15 +61,20 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
           )}
           {!loading && !error && (
             <ul>
-              {items.map((item, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleSelect(item)}
-                  className={styles.dropdownItem}
-                >
-                  {item}
-                </li>
-              ))}
+              {items.map((item, index) => {
+                if (typeof item !== "object") return null;
+                const firstKey = Object.keys(item)[0];
+                const displayValue = firstKey ? item[firstKey] : "Valor desconhecido";
+                return (
+                  <li
+                    key={index}
+                    onClick={() => handleSelect(displayValue)}
+                    className={styles.dropdownItem}
+                  >
+                    {displayValue}
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
