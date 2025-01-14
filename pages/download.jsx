@@ -1,17 +1,24 @@
-import Menu from "../components/Menu"
-import Sidebar from "../components/Sidebar"
-import MainDownload from "../components/MainDownload"
+import Menu from "../components/Menu";
+import Sidebar from "../components/Sidebar";
+import MainDownload from "../components/MainDownload";
+import { useState } from "react";
 
-export default function download(){
-    return (
-        <div className="center">
-            <div className="header">
-                <Menu></Menu>
-            </div>
-            <div className="principal">
-                <Sidebar></Sidebar>
-                <MainDownload />
-            </div>
-        </div>
-    )
+export default function download() {
+  const [filters, setFilters] = useState(null); // Armazena os filtros aplicados
+
+  const handleFilterApply = (appliedFilters) => {
+    setFilters(appliedFilters); // Atualiza os filtros aplicados
+  };
+
+  return (
+    <div className="center">
+      <div className="header">
+        <Menu />
+      </div>
+      <div className="principal">
+        <Sidebar onFilterApply={handleFilterApply} />
+        <MainDownload filters={filters} /> {/* Passa os filtros para MainDownload */}
+      </div>
+    </div>
+  );
 }

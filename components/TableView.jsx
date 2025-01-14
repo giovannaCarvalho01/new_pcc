@@ -1,18 +1,20 @@
-// components/TableView.js
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import styles from "../styles/TableView.module.css"; // Importe o módulo CSS
 
-export default function TableView() {
+export default function TableView({ filters }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const generatedData = Array.from({ length: 100 }, (_, i) => ({
-      id: i + 1,
-      name: `Item ${i + 1}`,
-      value: Math.floor(Math.random() * 100),
-    }));
-    setData(generatedData);
-  }, []);
+    // Apenas gera dados se filtros estiverem aplicados
+    if (filters) {
+      const generatedData = Array.from({ length: 100 }, (_, i) => ({
+        id: i + 1,
+        name: `Item ${i + 1}`,
+        value: Math.floor(Math.random() * 100),
+      }));
+      setData(generatedData);
+    }
+  }, [filters]); // Recarrega os dados toda vez que os filtros mudarem
 
   return (
     <div className={styles.tableContainer}>
