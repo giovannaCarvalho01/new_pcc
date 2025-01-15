@@ -8,6 +8,7 @@ export default function download() {
 
   const handleFilterApply = (appliedFilters) => {
     setFilters(appliedFilters); // Atualiza os filtros aplicados
+    console.log(appliedFilters);
   };
 
   return (
