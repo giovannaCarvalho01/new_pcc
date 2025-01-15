@@ -1,26 +1,44 @@
 .tableContainer {
   margin: 10px;
-  flex: 1; /* Faz a tabela ocupar todo o espaço disponível */
+  flex: 1;
   overflow-y: auto; /* Ativa o scroll vertical */
   overflow-x: auto; /* Ativa o scroll horizontal */
-  border: 1px solid #ddd; /* Borda ao redor da tabela */
+  border: 1px solid #ddd;
   background-color: white;
-  height: 80vh;
+  height: 80vh; /* Limite máximo de altura */
+  position: relative; /* Para fixar o cabeçalho no scroll */
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse; /* Remove os espaços entre bordas */
+  border-collapse: collapse;
+  min-width: 800px; /* Define uma largura mínima para o scroll horizontal */
 }
 
 .table th,
 .table td {
   border: 1px solid #ddd;
-  /* padding: 8px; */
+  padding: 8px;
   text-align: center;
+  white-space: nowrap; /* Impede quebra de linha nos dados */
 }
 
 .table th {
   background-color: #f4f4f4;
+  font-weight: bold;
+  position: sticky; /* Fixe o cabeçalho */
+  top: 0; /* Posição fixa no topo */
+  z-index: 1; /* Certifique-se de que o cabeçalho fique acima das células */
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}
+
+.error {
+  text-align: center;
+  color: red;
   font-weight: bold;
 }
