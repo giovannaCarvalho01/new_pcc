@@ -1,36 +1,49 @@
+/* Wrapper que limita a largura da tabela ao espaço disponível */
+.tableWrapper {
+  width: 100%; /* Ocupa 100% da largura do container pai */
+  max-width: calc(100vw - 250px); /* Subtrai a largura do sidebar */
+  overflow: hidden; /* Garante que nada extrapole */
+  padding-right: 10px; /* Espaço para um possível scroll */
+  margin: 0 auto; /* Centraliza no container */
+}
+
+/* Container com scroll para colunas e linhas */
 .tableContainer {
-  margin: 10px;
-  flex: 1;
+  height: 80vh; /* Altura máxima permitida */
   overflow-y: auto; /* Ativa o scroll vertical */
   overflow-x: auto; /* Ativa o scroll horizontal */
   border: 1px solid #ddd;
   background-color: white;
-  height: 80vh; /* Limite máximo de altura */
-  position: relative; /* Para fixar o cabeçalho no scroll */
+  position: relative; /* Necessário para o cabeçalho sticky */
 }
 
+/* Tabela */
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px; /* Define uma largura mínima para o scroll horizontal */
+  min-width: 800px; /* Garante um scroll horizontal para tabelas largas */
+  font-size: 9px;
 }
 
+/* Células */
 .table th,
 .table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 4px;
   text-align: center;
-  white-space: nowrap; /* Impede quebra de linha nos dados */
+  white-space: nowrap; /* Evita quebra de texto */
 }
 
+/* Cabeçalho fixo */
 .table th {
   background-color: #f4f4f4;
   font-weight: bold;
-  position: sticky; /* Fixe o cabeçalho */
-  top: 0; /* Posição fixa no topo */
-  z-index: 1; /* Certifique-se de que o cabeçalho fique acima das células */
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
+/* Estilos para mensagens de carregamento ou erro */
 .loading {
   text-align: center;
   font-size: 18px;

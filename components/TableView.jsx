@@ -50,31 +50,33 @@ export default function TableView({ filters }) {
   }
 
   return (
-    <div className={styles.tableContainer}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            {/* Adicione as colunas dinamicamente com base nos dados */}
-            {data.length > 0 &&
-              Object.keys(data[0]).map((col) => <th key={col}>{col}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {data.length > 0 ? (
-            data.map((item, index) => (
-              <tr key={index}>
-                {Object.values(item).map((value, i) => (
-                  <td key={i}>{value}</td>
-                ))}
-              </tr>
-            ))
-          ) : (
+    <div className={styles.tableWrapper}>
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
             <tr>
-              <td colSpan="100%">Nenhum dado encontrado.</td>
+              {/* Adicione as colunas dinamicamente com base nos dados */}
+              {data.length > 0 &&
+                Object.keys(data[0]).map((col) => <th key={col}>{col}</th>)}
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.length > 0 ? (
+              data.map((item, index) => (
+                <tr key={index}>
+                  {Object.values(item).map((value, i) => (
+                    <td key={i}>{value}</td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="100%">Nenhum dado encontrado.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
