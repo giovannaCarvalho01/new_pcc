@@ -23,6 +23,7 @@ export default function MainDownload({ filters }) {
         cat_adm: filters.catAdm,
         cod_ies: filters.ies,
         dsc_grp: filters.curso,
+        presenca: 555,
       }).toString();
 
       const response = await axios.get(`http://localhost:3001/notas/download?${queryParams}`, {
