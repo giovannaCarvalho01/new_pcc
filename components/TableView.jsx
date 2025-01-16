@@ -42,7 +42,12 @@ export default function TableView({ filters }) {
   }, [filters]);
 
   if (loading) {
-    return <p className={styles.loading}>Carregando dados...</p>;
+    return (
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
+        <p>Carregando dados...</p>
+      </div>
+    );
   }
 
   if (error) {

@@ -55,3 +55,34 @@
   color: red;
   font-weight: bold;
 }
+
+/* Estilos para mensagens de carregamento */
+.loading {
+  display: flex;
+  flex-direction: column; /* Coloca o spinner acima do texto */
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Centraliza verticalmente */
+  font-size: 18px;
+  color: #555;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3; /* Cor de fundo do spinner */
+  border-top: 4px solid #555; /* Cor da linha de destaque */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite; /* Animação girando */
+  margin-bottom: 10px; /* Espaço entre o spinner e o texto */
+}
+
+/* Animação do spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
