@@ -86,3 +86,54 @@
     transform: rotate(360deg);
   }
 }
+
+/* Media Queries */
+
+/* Para telas pequenas (mobile) */
+@media (max-width: 600px) {
+  .tableWrapper {
+    max-width: 100%; /* Aumenta a largura da tabela para ocupar toda a largura da tela */
+  }
+
+  .table th, .table td {
+    font-size: 12px; /* Reduz o tamanho da fonte em dispositivos móveis */
+    padding: 10px; /* Aumenta o padding para facilitar a interação */
+  }
+
+  .table {
+    min-width: 500px; /* Reduz o valor do min-width para permitir que a tabela se ajuste melhor ao tamanho da tela */
+  }
+}
+
+/* Para telas médias (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .tableWrapper {
+    max-width: calc(100vw - 150px); /* Aumenta o espaço disponível para a tabela, considerando a largura da sidebar */
+  }
+
+  .table th, .table td {
+    font-size: 14px; /* Ajusta o tamanho da fonte para tablets */
+    padding: 12px; /* Ajuste de padding para telas médias */
+  }
+}
+
+/* Para telas grandes (large) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .tableWrapper {
+    max-width: calc(100vw - 200px); /* Ajuste para telas grandes (considerando a sidebar) */
+  }
+
+  .table th, .table td {
+    font-size: 16px; /* Tamanho de fonte adequado para telas grandes */
+    padding: 14px; /* Aumenta o padding para telas maiores */
+  }
+}
+
+/* Para telas extra grandes (2large) */
+@media (min-width: 1201px) {
+
+  .table th, .table td {
+    font-size: 18px; /* Tamanho de fonte maior para telas maiores */
+    padding: 16px; /* Aumenta o padding para telas muito grandes */
+  }
+}

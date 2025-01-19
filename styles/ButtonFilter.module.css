@@ -1,10 +1,65 @@
-.stlButton {
-  margin-top: 10px;
-  background-color: green;
+/* Estilo padrão */
+.btnFiltrar {
+  background-color: #4CAF50;
   color: white;
-  border-radius: 20px;
-  font-size: 15px;
-  cursor: pointer;
-  text-decoration: none;
+  padding: 10px 20px;
   border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.btnFiltrar:hover {
+  background-color: #45a049;
+}
+
+/* Estado desabilitado */
+.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Media Queries */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .btnFiltrar {
+    width: 80%; /* Faz o botão ocupar toda a largura na tela pequena */
+    padding: 5px; /* Aumenta o padding para facilitar o clique */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    margin-top: 10px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .btnFiltrar {
+    width: 80%;
+    padding: 12px 25px;
+    font-size: 15px;
+    margin-top: 10px;
+  }
+}
+
+/* Large (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .btnFiltrar {
+    width: auto;
+    padding: 10px 50px; /* Aumenta o padding para telas maiores */
+    font-size: 18px; /* Aumenta o tamanho da fonte para maior legibilidade */
+    margin-top: 10px;
+  
+  }
+}
+
+/* 2Large (1281px em diante) */
+@media (min-width: 1281px) {
+  .btnFiltrar {
+    width: auto;
+    padding: 10px 50px; /* Aumenta o padding ainda mais para telas grandes */
+    font-size: 20px; /* Aumenta o tamanho da fonte para maior visibilidade */
+    margin-top: 10px;
+  }
 }

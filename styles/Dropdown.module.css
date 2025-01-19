@@ -5,7 +5,6 @@
   width: 90%;
   margin-top: 10px;
   justify-content: center;
-  /* margin: 20px auto; */
 }
 
 .dropdownButton {
@@ -37,7 +36,6 @@
 }
 
 .dropdownItem {
-  /* padding: 10px; */
   cursor: pointer;
   border-bottom: 1px solid #ddd;
   color: black;
@@ -51,7 +49,92 @@
 
 .dropdownButton::placeholder {
   font-size: 11px; /* Tamanho do placeholder ajustado */
-  /*color: #aaa; /* Cor do placeholder ajustada para ser mais discreta */
   color: black; /* Cor do placeholder ajustada para ser mais discreta */
+}
 
+/* Media Queries */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .dropdownButton {
+    font-size: 11px; /* Ajusta a fonte para mobile */
+    padding: 8px; /* Aumenta o padding para facilitar o clique */
+  }
+
+  .dropdown {
+    width: 90%; /* A largura do dropdown ocupa 90% */
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+  
+  .dropdownButton {
+    width: 90%;
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .dropdown {
+    width: 90%;
+  }
+  
+  .dropdownItem {
+    font-size: 12px;
+  }
+}
+
+/* Large (1024px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container {
+    width: 90%; /* Reduz a largura do container */
+  }
+  
+  .dropdownButton {
+    width: 90%;
+    padding: 10px; /* Aumenta o padding */
+    font-size: 14px;
+  }
+
+  .dropdown {
+    width: 90%; /* Ajusta a largura do dropdown */
+    max-height: 200px; /* Aumenta a altura máxima */
+  }
+
+  .dropdownItem {
+    font-size: 14px;
+  }
+
+  .dropdownButton::placeholder {
+    font-size: 13px; /* Ajusta o tamanho do placeholder */
+  }
+}
+
+/* 2Large (1280px e acima) */
+@media (min-width: 1281px) {
+  .container {
+    width: 100%; /* Reduz ainda mais a largura do container */
+  }
+
+  .dropdownButton {
+    width: 90%;
+    padding: 12px; /* Mais padding */
+    font-size: 16px;
+  }
+
+  .dropdown {
+    width: 90%;
+    max-height: 250px; /* Aumenta a altura máxima do dropdown */
+  }
+
+  .dropdownItem {
+    font-size: 16px;
+  }
+
+  .dropdownButton::placeholder {
+    font-size: 15px; /* Aumenta o tamanho do placeholder */
+  }
 }

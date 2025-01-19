@@ -79,3 +79,32 @@
 .dropdownItem:hover {
   background-color: #f0f0f0;
 }
+
+
+/* Media Queries */
+
+@media (max-width: 600px) {
+  .inputContainer {
+    flex-direction: column;
+  }
+
+  .input {
+    font-size: 16px; /* Aumenta a fonte para dispositivos móveis */
+    padding: 12px;
+  }
+
+  .clearIcon {
+    margin-top: 5px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .input {
+    font-size: 16px; /* Ajusta o tamanho da fonte para tablets */
+    padding: 10px;
+  }
+
+  .clearIcon {
+    font-size: 18px; /* Ajusta o tamanho do ícone para tablets */
+  }
+}
