@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
 import Menu from "../components/Menu";
 
-export default function Home() {
+export default function home() {
   const [filters, setFilters] = useState(null); // Armazena os filtros aplicados
 
   const handleFilterApply = (appliedFilters) => {
