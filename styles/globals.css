@@ -74,6 +74,10 @@
   margin-right: 10px;
 }
 
+.menu a {
+  font-size: 15px; /* Ajuste o valor conforme necessário */
+}
+
 a {
   text-decoration: none;
   color: white;
