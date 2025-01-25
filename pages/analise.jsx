@@ -14,7 +14,6 @@ export default function Analise() {
 
   return (
     <div className="center">
-      
       <div className="header">
         <Menu />
       </div>

@@ -1,4 +1,4 @@
-import styles from '../styles/MainAnalise.module.css'; // Importa o módulo CSS
+// import styles from '../styles/MainAnalise.module.css'; // Importa o módulo CSS
 import dynamic from 'next/dynamic';
 
 // Carrega os componentes apenas no cliente
@@ -12,23 +12,23 @@ export default function MainAnalise() {
     const expected = [12, 18, 30]; // Exemplo de valores esperados
 
     return(
-      <div className={styles.main}>
-        <div className={styles.superior}>
+      <div className="main">
+        <div className="superiorAnalise">
             {/* Gráfico de Barras */}
-            <div className={styles.section}>
+            <div className="superiorSecao">
                 {/* <h2>Gráfico de Barras: Observado vs Esperado</h2> */}
                 <BarChart observed={observed} expected={expected} />
             </div>
 
             {/* Gráfico de Boxplot */}
-            <div className={styles.section}>
+            <div className="superiorSecao">
                 {/* <h2>Gráfico de Boxplot</h2> */}
                 <BoxPlotChart data={data} />
             </div>
         </div>
-        <div className={styles.inferior}>
+        <div className="inferiorAnalise">
             {/* Tabela com os resultados do Qui-Quadrado */}
-            <div className={styles.section}>
+            <div className="inferiorSecao">
                 <h2>Resultados do Teste Qui-Quadrado</h2>
                 <ChiSquareTable observed={observed} expected={expected} />
             </div>
