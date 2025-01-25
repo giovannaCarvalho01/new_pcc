@@ -1,11 +1,3 @@
-// export default function PieChart(){
-//     return(
-//         <div className="pieChart">
-//             pieChart
-//         </div>
-//     )
-// }
-
 import React, { useEffect, useState } from "react"
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"
 

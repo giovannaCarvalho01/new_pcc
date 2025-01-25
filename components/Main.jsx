@@ -1,7 +1,6 @@
 import PieChartComponent from "../components/PieChart";
 import LineChart from "../components/LineChart";
 
-// Função do componente Main
 export default function Main({ filters }) {
   const datas = [
     { name: "Chrome", value: 275 },
@@ -13,7 +12,7 @@ export default function Main({ filters }) {
 
   return (
     <div className="main">
-      {filters ? ( // Verifica se os filtros estão definidos
+      {filters ? (
         <>
           <div className="superior">
             <PieChartComponent data={datas} />
@@ -21,7 +20,7 @@ export default function Main({ filters }) {
             <PieChartComponent data={datas} />
           </div>
           <div className="inferior" style={{ width: "100%" }}>
-            <LineChart />
+            <LineChart filters={filters} /> {/* Passando os filtros para o LineChart */}
           </div>
         </>
       ) : (
