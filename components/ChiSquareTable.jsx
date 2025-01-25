@@ -32,7 +32,7 @@ const ChiSquareTable = ({ observed, expected }) => {
         style={{
           margin: '20px auto',
           borderCollapse: 'collapse',
-          width: '80%',
+          width: '100%',
           textAlign: 'left',
           border: '1px solid #ddd',
         }}
@@ -47,8 +47,8 @@ const ChiSquareTable = ({ observed, expected }) => {
           {/* Linhas para cada categoria */}
           {observed.map((obs, index) => (
             <tr key={index}>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{`Categoria ${index + 1}`}</td>
-              <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
+              <td style={{ padding: '5px', borderBottom: '1px solid #ddd' }}>{`Categoria ${index + 1}`}</td>
+              <td style={{ padding: '5px', borderBottom: '1px solid #ddd' }}>
                 Observado: {obs}, Esperado: {expected[index]}, Diferença: {Math.pow(obs - expected[index], 2).toFixed(2)}
               </td>
             </tr>
