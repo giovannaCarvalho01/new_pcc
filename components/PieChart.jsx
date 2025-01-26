@@ -12,9 +12,6 @@ export default function PieChartComponent({ filters, variavel }) {
           variavel,   // Passa a variável selecionada para o backend
           ...filters, // Passa os filtros aplicados
         });
-        
-        // TODO: DEPOIS QUE FILTRA UMA VEZ E FILTRA NOVAMENTE TÁ ESTOURANDO ERRO
-        console.log("Query Params:", queryParams.toString());  // Verifique os parâmetros enviados para o backend
 
         // Realiza a requisição para o backend
         const response = await fetch(`http://localhost:3001/graficos?${queryParams.toString()}`);
@@ -48,7 +45,8 @@ export default function PieChartComponent({ filters, variavel }) {
     return <div>Carregando...</div>;
   }
 
-  const colors = ["#FF8042", "#FFBB28", "#0088FE", "#00C49F", "#FF8042", "#8DFF42", "#604F98"];
+  // Cores exclusivas para cada variável
+  const colors = ["#FF8042", "#FFBB28", "#0088FE", "#00C49F", "#8DFF42", "#604F98"];
 
   // Preparar os dados para o gráfico de pizza do Plotly
   const labels = clientData.map(item => item.variavel);  // "Feminino", "Masculino"
@@ -71,13 +69,13 @@ export default function PieChartComponent({ filters, variavel }) {
             textposition: "inside",  // Posição do texto dentro da fatia
             hole: 0.4,  // Para gráficos de pizza com buraco no meio (como gráfico de rosquinha)
             marker: {
-              colors: colors
+              colors: colors,  // Defina as cores conforme necessário
             },
           },
         ]}
         layout={{
           height: 400,  // Altura do gráfico
-          width: 400,   // Largura do gráfico
+          width: 350,   // Largura do gráfico
           title: "Distribuição de " + variavel,  // Título do gráfico
           showlegend: true,  // Exibe a legenda
           legend: {
