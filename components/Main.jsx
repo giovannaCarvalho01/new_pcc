@@ -1,29 +1,26 @@
-import PieChartComponent from "../components/PieChart";
-import LineChart from "../components/LineChart";
+import PizzaChart from "../components/PizzaChart";
 
 export default function Main({ filters }) {
-  // Defina a variável que você quer passar para o backend (ex: "sexo", "curso")
-  // const variavel = "sexo"; // Aqui você pode fazer a variável ser dinâmica, por exemplo, por meio de um select no frontend
+  console.log("Props filters no Main:", filters); // Logando os filtros no Main
+
+  // Verifica se os filtros estão aplicados e se a variável foi passada
+  if (!filters || Object.keys(filters).length === 0) {
+    return (
+      <div className="placeholder">
+        <p>Por favor, aplique os filtros para visualizar os gráficos.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="main">
-      {filters ? (
-        <>
-          <div className="superior">
-            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
-            <PieChartComponent filters={filters} variavel={'raca_dsc'} />
-            <PieChartComponent filters={filters} variavel={'cotista_dsc'} />
-            <PieChartComponent filters={filters} variavel={'estado_civil_dsc'} />
-          </div>
-          <div className="inferior" style={{ width: "100%" }}>
-            <LineChart filters={filters} />
-          </div>
-        </>
-      ) : (
-        <div className="placeholder">
-          <p>Por favor, aplique os filtros para visualizar os gráficos.</p>
-        </div>
-      )}
+      <div className="superior">
+        <h2>Resultados dos Gráficos</h2>
+      </div>
+      <div className="inferior" style={{ width: "100%" }}>
+        {/* Passando os filtros e a variável fixada como 'sexo_dsc' */}
+        <PizzaChart filters={filters} variavel={"sexo_dsc"} />
+      </div>
     </div>
   );
 }
