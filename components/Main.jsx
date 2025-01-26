@@ -11,8 +11,9 @@ export default function Main({ filters }) {
         <>
           <div className="superior">
             <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
-            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
-            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
+            <PieChartComponent filters={filters} variavel={'raca_dsc'} />
+            <PieChartComponent filters={filters} variavel={'cotista_dsc'} />
+            <PieChartComponent filters={filters} variavel={'estado_civil_dsc'} />
           </div>
           <div className="inferior" style={{ width: "100%" }}>
             <LineChart filters={filters} />

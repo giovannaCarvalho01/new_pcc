@@ -45,6 +45,8 @@ export default function PieChartComponent({ filters, variavel }) {
     return <div>Carregando...</div>;
   }
 
+  const colors = ["#FF8042", "#FFBB28", "#0088FE", "#00C49F", "#FF8042", "#8DFF42", "#604F98"];
+
   // Preparar os dados para o gráfico de pizza do Plotly
   const labels = clientData.map(item => item.variavel);  // "Feminino", "Masculino"
   const values = clientData.map(item => item.percentual);  // Percentual (73.13, 26.87, etc.)
@@ -52,7 +54,7 @@ export default function PieChartComponent({ filters, variavel }) {
   return (
     <div style={{ textAlign: "center" }}>
       {/* Exibe o título do gráfico */}
-      <h2>Gráfico de Pizza - {variavel}</h2>
+      {/* <h2>Gráfico de Pizza - {variavel}</h2> */}
 
       {/* Usando Plotly para renderizar o gráfico de pizza */}
       <Plot
@@ -66,7 +68,7 @@ export default function PieChartComponent({ filters, variavel }) {
             textposition: "inside",  // Posição do texto dentro da fatia
             hole: 0.4,  // Para gráficos de pizza com buraco no meio (como gráfico de rosquinha)
             marker: {
-              colors: ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"],  // Defina as cores conforme necessário
+              colors: colors
             },
           },
         ]}
