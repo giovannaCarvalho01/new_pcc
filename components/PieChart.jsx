@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"; // Certifique-se de que a importação está assim
-
-// Definindo algumas cores para os setores do gráfico
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"];
+import Plot from "react-plotly.js";  // Importando o componente Plot do Plotly
 
 export default function PieChartComponent({ filters, variavel }) {
   const [clientData, setClientData] = useState(null);
@@ -48,37 +45,42 @@ export default function PieChartComponent({ filters, variavel }) {
     return <div>Carregando...</div>;
   }
 
+  // Preparar os dados para o gráfico de pizza do Plotly
+  const labels = clientData.map(item => item.variavel);  // "Feminino", "Masculino"
+  const values = clientData.map(item => item.percentual);  // Percentual (73.13, 26.87, etc.)
+
   return (
     <div style={{ textAlign: "center" }}>
-      {/* Exibe o título do gráfico, você pode ajustar conforme a variável */}
+      {/* Exibe o título do gráfico */}
       <h2>Gráfico de Pizza - {variavel}</h2>
 
-      {/* Exibe o gráfico de pizza com o percentual */}
-      <PieChart width={220} height={220}>
-        <Pie
-          data={clientData}
-          dataKey="percentual"  // Alterado para exibir o percentual
-          nameKey="variavel"   // Mantém como 'variavel' para os nomes das fatias
-          cx="50%"
-          cy="50%"
-          outerRadius={50}
-          fill="#8884d8"
-          label={({ percent }) => `${(percent * 100).toFixed(2)}%`} // Exibe o percentual sobre a fatia
-        >
-          {clientData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />  {/* Exibe os valores como percentual no Tooltip */}
-        <Legend
-          formatter={(value) => value} // Exibe apenas o nome da variável (sem o percentual) na legenda
-          wrapperStyle={{
-            fontSize: "10px", // Tamanho da fonte da legenda
-            fontFamily: "Arial, sans-serif", // Fonte da legenda
-            fontWeight: "normal", // Peso da fonte
-          }}
-        />
-      </PieChart>
+      {/* Usando Plotly para renderizar o gráfico de pizza */}
+      <Plot
+        data={[
+          {
+            type: "pie",
+            labels: labels,  // Labels para as fatias (Feminino, Masculino, etc.)
+            values: values,  // Percentuais correspondentes
+            hoverinfo: "label+percent",  // Exibe o rótulo e o percentual ao passar o mouse
+            // textinfo: "label+percent",  // Exibe o rótulo e o percentual no gráfico
+            textposition: "inside",  // Posição do texto dentro da fatia
+            hole: 0.4,  // Para gráficos de pizza com buraco no meio (como gráfico de rosquinha)
+            marker: {
+              colors: ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"],  // Defina as cores conforme necessário
+            },
+          },
+        ]}
+        layout={{
+          height: 400,  // Altura do gráfico
+          width: 400,   // Largura do gráfico
+          title: "Distribuição de " + variavel,  // Título do gráfico
+          showlegend: true,  // Exibe a legenda
+          legend: {
+            font: { size: 10 },  // Tamanho da fonte da legenda
+            orientation: "h",    // Layout horizontal da legenda
+          },
+        }}
+      />
     </div>
   );
 }
