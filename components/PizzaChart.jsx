@@ -8,12 +8,11 @@ const PizzaChart = ({ filters, variavel }) => {
 
   // Cores personalizadas para cada fatia
   const COLORS = [
-    "#0088FE", "#FF8042", "#00C49F", "#FFBB28", "#FF8042", 
-    "#FF6347", "#8A2BE2", "#20B2AA", "#D2691E", "#FF4500"
+    "#0088FE", "#FF8042", "#00C49F", "#FFBB28", 
+    "#8A2BE2", "#20B2AA", "#D2691E", "#FF4500"
   ];
 
   useEffect(() => {
-    // Evita a chamada da API se não houver filtros ou variável
     if (Object.keys(filters).length === 0 || !variavel) {
       setLoading(false);
       return;
@@ -23,7 +22,6 @@ const PizzaChart = ({ filters, variavel }) => {
       setLoading(true);
       setError(null);
       try {
-        // Preparar a query de filtros e a variável
         const queryParams = new URLSearchParams({ ...filters, variavel }).toString();
         const response = await fetch(`http://localhost:3001/graficos?${queryParams}`);
         
@@ -41,38 +39,50 @@ const PizzaChart = ({ filters, variavel }) => {
     };
 
     fetchData();
-  }, [filters, variavel]); // Executa a chamada sempre que filtros ou variável mudam
+  }, [filters, variavel]);
 
-  // Exibe um carregamento enquanto busca os dados
   if (loading) {
     return <div>Carregando gráfico...</div>;
   }
 
-  // Exibe uma mensagem de erro caso algo dê errado
   if (error) {
     return <div>Erro: {error}</div>;
   }
 
   return (
-    <div style={{ width: "100%", height: "200px" }}>
-      <PieChart width={300} height={300}>
-        <Pie
-          data={data}
-          dataKey="quantidade" // Exemplo de uso de "quantidade" para o valor
-          nameKey="variavel" // Exemplo de uso de "variavel" para o nome
-          cx="50%"
-          cy="50%"
-          outerRadius={75}
-          fill="#8884d8"
-          label
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ flex: 1, paddingRight: '20px' }}>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={data}
+            dataKey="quantidade"
+            nameKey="variavel"
+            cx="50%"
+            cy="50%"
+            outerRadius={75}
+            fill="#8884d8"
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+      </div>
+      
+      <Legend
+        layout="vertical"
+        verticalAlign="middle"
+        align="right"
+        wrapperStyle={{
+          top: '0',
+          left: '10px',
+          lineHeight: '20px',
+          maxHeight: '300px', // Limite de altura para as legendas
+          overflowY: 'auto', // Permite rolar as legendas se necessário
+        }}
+      />
     </div>
   );
 };

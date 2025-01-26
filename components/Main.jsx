@@ -15,11 +15,15 @@ export default function Main({ filters }) {
   return (
     <div className="main">
       <div className="superior">
-        <h2>Resultados dos Gráficos</h2>
+        <PizzaChart filters={filters} variavel={"sexo_dsc"} />
+        <PizzaChart filters={filters} variavel={"raca_dsc"} />
+        <PizzaChart filters={filters} variavel={"cotista_dsc"} />
+        {/* <PizzaChart filters={filters} variavel={"estado_civil_dsc"} /> */}
+
       </div>
       <div className="inferior" style={{ width: "100%" }}>
         {/* Passando os filtros e a variável fixada como 'sexo_dsc' */}
-        <PizzaChart filters={filters} variavel={"sexo_dsc"} />
+        {/* <PizzaChart filters={filters} variavel={"sexo_dsc"} /> */}
       </div>
     </div>
   );
