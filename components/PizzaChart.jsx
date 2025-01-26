@@ -50,39 +50,39 @@ const PizzaChart = ({ filters, variavel }) => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div style={{ flex: 1, paddingRight: '20px' }}>
-        <PieChart width={300} height={300}>
-          <Pie
-            data={data}
-            dataKey="quantidade"
-            nameKey="variavel"
-            cx="50%"
-            cy="50%"
-            outerRadius={75}
-            fill="#8884d8"
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
-      </div>
-      
-      <Legend
-        layout="vertical"
-        verticalAlign="middle"
-        align="right"
-        wrapperStyle={{
-          top: '0',
-          left: '10px',
-          lineHeight: '20px',
-          maxHeight: '300px', // Limite de altura para as legendas
-          overflowY: 'auto', // Permite rolar as legendas se necessário
-        }}
-      />
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      {/* Gráfico */}
+      <PieChart width={350} height={350}>
+        <Pie
+          data={data}
+          dataKey="quantidade" // Dados para os valores
+          nameKey="variavel"   // Nome que será exibido na legenda
+          cx="50%"
+          cy="50%"
+          outerRadius={75}
+          fill="#8884d8"
+          label
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+        {/* Legenda com layout horizontal */}
+        <Legend 
+          layout="horizontal"  // Coloca as legendas em linha horizontal
+          align="center"       // Alinha as legendas ao centro
+          verticalAlign="top"  // Para ter a legenda no topo
+          wrapperStyle={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',  // Centraliza as legendas horizontalmente
+            flexWrap: 'wrap',          // Permite quebra de linha, se necessário
+            padding: '10px 0',         // Espaço extra para as legendas
+            fontSize: '12px',          // Ajuste no tamanho da fonte da legenda
+          }}
+        />
+      </PieChart>
     </div>
   );
 };
