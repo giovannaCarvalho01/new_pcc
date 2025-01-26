@@ -98,6 +98,8 @@ a {
   display: flex;
   justify-content: space-between;
   height: 50vh;
+  padding-top: 30px;
+  padding-right: 10px;
 }
 
 .inferior{
@@ -105,6 +107,8 @@ a {
   display: flex;
   justify-content: space-between;
   height: 45vh;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 /* FIM DO MAIN */
@@ -213,7 +217,8 @@ a {
   height: 50vh;
   /* background-color: aqua; */
   justify-content: space-around;
-  padding-top: 10px;
+  padding-top: 30px;
+  padding-right: 10px;
 }
   
 .inferiorAnalise{
@@ -222,7 +227,7 @@ a {
   /* background-color: red; */
   justify-content: center;
   padding-top: 10px;
-
+  padding-right: 10px;
 }
 
 /* Tablet */

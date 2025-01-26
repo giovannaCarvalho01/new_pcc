@@ -2,25 +2,20 @@ import PieChartComponent from "../components/PieChart";
 import LineChart from "../components/LineChart";
 
 export default function Main({ filters }) {
-  const datas = [
-    { name: "Chrome", value: 275 },
-    { name: "Safari", value: 200 },
-    { name: "Firefox", value: 287 },
-    { name: "Edge", value: 173 },
-    { name: "Other", value: 190 },
-  ];
+  // Defina a variável que você quer passar para o backend (ex: "sexo", "curso")
+  // const variavel = "sexo"; // Aqui você pode fazer a variável ser dinâmica, por exemplo, por meio de um select no frontend
 
   return (
     <div className="main">
       {filters ? (
         <>
           <div className="superior">
-            <PieChartComponent data={datas} />
-            <PieChartComponent data={datas} />
-            <PieChartComponent data={datas} />
+            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
+            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
+            <PieChartComponent filters={filters} variavel={'sexo_dsc'} />
           </div>
           <div className="inferior" style={{ width: "100%" }}>
-            <LineChart filters={filters} /> {/* Passando os filtros para o LineChart */}
+            <LineChart filters={filters} />
           </div>
         </>
       ) : (
