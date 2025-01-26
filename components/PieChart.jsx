@@ -12,6 +12,9 @@ export default function PieChartComponent({ filters, variavel }) {
           variavel,   // Passa a variável selecionada para o backend
           ...filters, // Passa os filtros aplicados
         });
+        
+        // TODO: DEPOIS QUE FILTRA UMA VEZ E FILTRA NOVAMENTE TÁ ESTOURANDO ERRO
+        console.log("Query Params:", queryParams.toString());  // Verifique os parâmetros enviados para o backend
 
         // Realiza a requisição para o backend
         const response = await fetch(`http://localhost:3001/graficos?${queryParams.toString()}`);
