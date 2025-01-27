@@ -7,8 +7,8 @@ const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
 });
 
 const BarChart = dynamic(() => import("../components/BarChart"), {
-    ssr: false,
-  });
+  ssr: false,
+});
 
 export default function MainAnalise({ filters }) {
   const [data, setData] = useState([]); // Dados principais
@@ -16,7 +16,7 @@ export default function MainAnalise({ filters }) {
   const [limites, setLimites] = useState({}); // Limites do boxplot
 
   useEffect(() => {
-    if (!filters) return;
+    if (!filters) return; // Evita execução sem filtros
 
     const fetchData = async () => {
       try {
@@ -40,12 +40,15 @@ export default function MainAnalise({ filters }) {
     fetchData();
   }, [filters]); // Refaz a busca sempre que os filtros mudarem
 
+  // Verifica se os dados estão disponíveis antes de renderizar o gráfico
+  if (!filters || data.length === 0 || !limites.q1) {
+    return <div>Selecione os filtros para visualizar o gráfico.</div>; // Mensagem caso os filtros não sejam definidos
+  }
+
   return (
     <div className="main">
       <div className="superiorAnalise">
-        {/* Gráfico de Boxplot */}
         <div className="superiorSecao">
-          {/* <BarChart /> */}
           <BoxPlotChart data={data} outliers={outliers} limites={limites} />
         </div>
       </div>
