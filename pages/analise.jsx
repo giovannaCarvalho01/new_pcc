@@ -1,4 +1,3 @@
-// pages/analise.js
 import Menu from "../components/Menu";
 import Sidebar from "../components/Sidebar";
 import MainAnalise from "../components/MainAnalise";
@@ -9,7 +8,7 @@ export default function Analise() {
 
   const handleFilterApply = (appliedFilters) => {
     setFilters(appliedFilters); // Atualiza os filtros aplicados
-    console.log(appliedFilters);
+    console.log("Filtros aplicados:", appliedFilters);
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Analise() {
 
       <div className="principal">
         <Sidebar onFilterApply={handleFilterApply} />
-        <MainAnalise />
+        <MainAnalise filters={filters} /> {/* Passa os filtros para o MainAnalise */}
       </div>
     </div>
   );

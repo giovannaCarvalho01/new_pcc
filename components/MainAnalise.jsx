@@ -1,38 +1,55 @@
-// import styles from '../styles/MainAnalise.module.css'; // Importa o módulo CSS
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 // Carrega os componentes apenas no cliente
-const BoxPlotChart = dynamic(() => import('../components/BoxPlotChart'), { ssr: false });
-const ChiSquareTable = dynamic(() => import('../components/ChiSquareTable'), { ssr: false });
-const BarChart = dynamic(() => import('../components/BarChart'), { ssr: false });
+const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
+  ssr: false,
+});
 
-export default function MainAnalise() {
-    const data = [7, 8, 9, 10, 12, 20, 3]; // Dados para o Boxplot
-    const observed = [10, 20, 30]; // Exemplo de valores observados
-    const expected = [12, 18, 30]; // Exemplo de valores esperados
+const BarChart = dynamic(() => import("../components/BarChart"), {
+    ssr: false,
+  });
 
-    return(
-      <div className="main">
-        <div className="superiorAnalise">
-            {/* Gráfico de Barras */}
-            <div className="superiorSecao">
-                {/* <h2>Gráfico de Barras: Observado vs Esperado</h2> */}
-                <BarChart observed={observed} expected={expected} />
-            </div>
+export default function MainAnalise({ filters }) {
+  const [data, setData] = useState([]); // Dados principais
+  const [outliers, setOutliers] = useState([]); // Outliers separados
+  const [limites, setLimites] = useState({}); // Limites do boxplot
 
-            {/* Gráfico de Boxplot */}
-            <div className="superiorSecao">
-                {/* <h2>Gráfico de Boxplot</h2> */}
-                <BoxPlotChart data={data} />
-            </div>
-        </div>
-        <div className="inferiorAnalise">
-            {/* Tabela com os resultados do Qui-Quadrado */}
-            <div className="inferiorSecao">
-                <h2>Resultados do Teste Qui-Quadrado</h2>
-                <ChiSquareTable observed={observed} expected={expected} />
-            </div>
+  useEffect(() => {
+    if (!filters) return;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/boxplot?${new URLSearchParams(filters)}`
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar os dados");
+        }
+        const result = await response.json();
+
+        // Atualiza os estados com os dados retornados
+        setData(result.valores); // Dados principais
+        setOutliers(result.outliers); // Outliers explícitos
+        setLimites(result.limites); // Limites do boxplot
+      } catch (error) {
+        console.error("Erro ao buscar os dados do backend:", error);
+      }
+    };
+
+    fetchData();
+  }, [filters]); // Refaz a busca sempre que os filtros mudarem
+
+  return (
+    <div className="main">
+      <div className="superiorAnalise">
+        {/* Gráfico de Boxplot */}
+        <div className="superiorSecao">
+          {/* <BarChart /> */}
+          <BoxPlotChart data={data} outliers={outliers} limites={limites} />
         </div>
       </div>
-    );
+      <div className="inferiorAnalise"></div>
+    </div>
+  );
 }
