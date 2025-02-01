@@ -22,7 +22,7 @@ export default function MainDownload({ filters }) {
         municipio: filters.municipio,
         cat_adm: filters.catAdm,
         cod_ies: filters.ies,
-        dsc_grp: filters.curso,
+        grp: filters.curso,
         presenca: 555,
       }).toString();
 

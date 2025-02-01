@@ -53,7 +53,7 @@ export default function Sidebar({ onFilterApply }) {
         <DropdownFilter
           onSelect={setRegiaoSelecionado}
           placeholder="Selecione a região"
-          queryParams={`coluna=dsc_regiao_completo&ano=${anoSelecionado}`}
+          queryParams={`coluna=dsc_regiao&ano=${anoSelecionado}`}
         />
       )}
       {regiaoSelecionado && (
@@ -88,7 +88,7 @@ export default function Sidebar({ onFilterApply }) {
         <DropdownFilter
           onSelect={setCursoSelecionado}
           placeholder="Selecione o curso"
-          queryParams={`coluna=dsc_grp&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}&cod_ies=${iesSelecionado}`}
+          queryParams={`coluna=dsc_grupo&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}&cod_ies=${iesSelecionado}`}
         />
       )}
       
