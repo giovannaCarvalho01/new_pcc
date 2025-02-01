@@ -23,7 +23,7 @@ const PizzaChart = ({ filters, variavel }) => {
       setError(null);
       try {
         const queryParams = new URLSearchParams({ ...filters, variavel }).toString();
-        const response = await fetch(`http://localhost:3001/graficos?${queryParams}`);
+        const response = await fetch(`http://localhost:3001/graficos?presenca=555&${queryParams}`);
         
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados");
