@@ -1,33 +1,11 @@
-// components/ChiSquareTable.js
 import React from 'react';
 
-// Função para calcular o Qui-Quadrado
-const calculateChiSquare = (observed, expected) => {
-  if (observed.length !== expected.length) {
-    throw new Error("As listas de valores observados e esperados devem ter o mesmo tamanho.");
-  }
-
-  let chiSquare = 0;
-  for (let i = 0; i < observed.length; i++) {
-    chiSquare += Math.pow(observed[i] - expected[i], 2) / expected[i];
-  }
-
-  return chiSquare.toFixed(2); // Retorna com 2 casas decimais
-};
-
-// Função para calcular o p-valor (aproximação para uma distribuição qui-quadrado com 2 graus de liberdade)
-const calculatePValue = (chiSquareValue, degreesOfFreedom = 2) => {
-  const pValue = 1 - (chiSquareValue / degreesOfFreedom); // Simulação simples de p-valor
-  return pValue.toFixed(4); // Limitar o p-valor a 4 casas decimais
-};
-
-const ChiSquareTable = ({ observed, expected }) => {
-  const chiSquare = calculateChiSquare(observed, expected);
-  const pValue = calculatePValue(chiSquare);
+const ChiSquareTable = ({ chiSquareResult }) => {
+  // Extrai os dados do resultado
+  const { qui2, valor_p, graus_de_liberdade, frequencias_observadas, frequencias_esperadas, resultado_significativo } = chiSquareResult;
 
   return (
     <div>
-      {/* <h2>Resultados do Teste Qui-Quadrado</h2> */}
       <table
         style={{
           margin: '20px auto',
@@ -44,28 +22,47 @@ const ChiSquareTable = ({ observed, expected }) => {
           </tr>
         </thead>
         <tbody>
-          {/* Linhas para cada categoria */}
-          {observed.map((obs, index) => (
-            <tr key={index}>
-              <td style={{ padding: '5px', borderBottom: '1px solid #ddd' }}>{`Categoria ${index + 1}`}</td>
-              <td style={{ padding: '5px', borderBottom: '1px solid #ddd' }}>
-                Observado: {obs}, Esperado: {expected[index]}, Diferença: {Math.pow(obs - expected[index], 2).toFixed(2)}
-              </td>
-            </tr>
-          ))}
-          {/* Linha para o valor total de Qui-Quadrado */}
+          {/* Qui-Quadrado */}
           <tr>
-            <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>
-              <strong>Total Qui-Quadrado</strong>
-            </td>
-            <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{chiSquare}</td>
+            <td style={{ padding: '10px' }}><strong>Qui-Quadrado</strong></td>
+            <td style={{ padding: '10px' }}>{qui2}</td>
           </tr>
-          {/* Linha para o P-valor */}
+
+          {/* Valor-p */}
           <tr>
+            <td style={{ padding: '10px' }}><strong>Valor-p</strong></td>
+            <td style={{ padding: '10px' }}>{valor_p}</td>
+          </tr>
+
+          {/* Graus de Liberdade */}
+          <tr>
+            <td style={{ padding: '10px' }}><strong>Graus de Liberdade</strong></td>
+            <td style={{ padding: '10px' }}>{graus_de_liberdade}</td>
+          </tr>
+
+          {/* Frequências Observadas e Esperadas */}
+          <tr>
+            <td style={{ padding: '10px' }}><strong>Frequências Observadas</strong></td>
             <td style={{ padding: '10px' }}>
-              <strong>P-Valor</strong>
+              {frequencias_observadas.map((row, index) => (
+                <div key={index}>{`[${row.join(", ")}]`}</div>
+              ))}
             </td>
-            <td style={{ padding: '10px' }}>{pValue}</td>
+          </tr>
+
+          <tr>
+            <td style={{ padding: '10px' }}><strong>Frequências Esperadas</strong></td>
+            <td style={{ padding: '10px' }}>
+              {frequencias_esperadas.map((row, index) => (
+                <div key={index}>{`[${row.join(", ")}]`}</div>
+              ))}
+            </td>
+          </tr>
+
+          {/* Resultado Significativo */}
+          <tr>
+            <td style={{ padding: '10px' }}><strong>Resultado Significativo</strong></td>
+            <td style={{ padding: '10px' }}>{resultado_significativo ? 'Sim' : 'Não'}</td>
           </tr>
         </tbody>
       </table>
