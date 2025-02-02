@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import ChiSquareTable from "../components/ChiSquareTable"; // Componente para exibir o resultado
+import FisherTestTable from "../components/FisherTestTable"; // Componente para exibir o Fisher Test
 import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 // Carrega os componentes apenas no cliente
@@ -17,6 +18,7 @@ export default function MainAnalise({ filters }) {
   const [outliers, setOutliers] = useState([]); // Outliers separados
   const [limites, setLimites] = useState({}); // Limites do boxplot
   const [chiSquareResult, setChiSquareResult] = useState(null); // Resultado do teste Qui-Quadrado
+  const [fisherResult, setFisherResult] = useState(null); // Resultado do Fisher
   const [error, setError] = useState(null); // Estado para mensagem de erro
   const [showErrorModal, setShowErrorModal] = useState(false); // Controla a exibição do modal
 
@@ -49,7 +51,15 @@ export default function MainAnalise({ filters }) {
           throw new Error(chiSquareErrorData.message || "Erro ao calcular Qui-Quadrado");
         }
         const chiSquareData = await chiSquareResponse.json();
-        setChiSquareResult(chiSquareData); // Atualiza o resultado do Qui-Quadrado
+        
+        // Verificar se o resultado é Fisher ou Qui-Quadrado
+        if (chiSquareData.metodo === "Fisher Exact Test") {
+          setFisherResult(chiSquareData); // Se for Fisher
+          setChiSquareResult(null); // Limpa o resultado do Qui-Quadrado
+        } else if (chiSquareData.metodo === "Chi-Square Test") {
+          setChiSquareResult(chiSquareData); // Se for Qui-Quadrado
+          setFisherResult(null); // Limpa o resultado do Fisher
+        }
       } catch (error) {
         setError(error.message); // Atualiza o erro
         setShowErrorModal(true); // Exibe o modal
@@ -77,6 +87,11 @@ export default function MainAnalise({ filters }) {
           {chiSquareResult && (
             <ChiSquareTable
               chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
+            />
+          )}
+          {fisherResult && (
+            <FisherTestTable
+              fisherResult={fisherResult} // Passa o objeto completo para o componente Fisher
             />
           )}
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: PRECISA AJUSTAR PQ AGORA VAI RECEBER MAIS VALORES
 const ChiSquareTable = ({ chiSquareResult }) => {
   // Extrai os dados do resultado
   const { qui2, valor_p, graus_de_liberdade, frequencias_observadas, frequencias_esperadas, resultado_significativo } = chiSquareResult;
