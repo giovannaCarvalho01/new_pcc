@@ -10,14 +10,40 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
 
   const baseEndpoint = "http://localhost:3001/filter?";
   const endpointAno = "http://localhost:3001/anos";
+  const endpointVariavel = "http://localhost:3001/variavel/";
+
 
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
       setError(null);
 
-      const fullEndpoint =
-        coluna === "ano" ? endpointAno : `${baseEndpoint}${queryParams}`;
+      let fullEndpoint;
+
+      let fetchedItems = [];
+
+      // Se a coluna for "alfa", use um conjunto fixo de valores
+      if (coluna === "alfa") {
+        fetchedItems = [
+          { value: "0.001", label: "0.001" },
+          { value: "0.01", label: "0.01" },
+          { value: "0.02", label: "0.02" },
+          { value: "0.05", label: "0.05" },
+          { value: "0.10", label: "0.10" },
+        ];
+        setItems(fetchedItems);
+        setLoading(false); // Não precisa aguardar carregamento, já temos os dados
+        return;
+      }
+      
+      // Mudando o endpoint dependendo do valor de "coluna"
+      if (coluna === "ano") {
+        fullEndpoint = endpointAno; // Endpoint para anos
+      } else if (coluna === "variavel") {
+        fullEndpoint = `${endpointVariavel}${queryParams}`; // Endpoint para variáveis com queryParams
+      } else {
+        fullEndpoint = `${baseEndpoint}${queryParams}`; // Endpoint padrão
+      }
 
       try {
         const response = await fetch(fullEndpoint);

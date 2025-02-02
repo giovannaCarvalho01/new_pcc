@@ -1,5 +1,5 @@
 import Menu from "../components/Menu";
-import Sidebar from "../components/Sidebar";
+import SidebarChi from "../components/SidebarChi";
 import MainAnalise from "../components/MainAnalise";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ export default function Analise() {
       </div>
 
       <div className="principal">
-        <Sidebar onFilterApply={handleFilterApply} />
+        <SidebarChi onFilterApply={handleFilterApply} />
         <MainAnalise filters={filters} /> {/* Passa os filtros para o MainAnalise */}
       </div>
     </div>

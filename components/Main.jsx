@@ -15,9 +15,15 @@ export default function Main({ filters }) {
   return (
     <div className="main">
       <div className="superior">
-        <PizzaChart filters={filters} variavel={"sexo"} />
-        <PizzaChart filters={filters} variavel={"raca"} />
-        <PizzaChart filters={filters} variavel={"cotista"} />
+        <div className="grafico">
+          <PizzaChart filters={filters} variavel={"sexo"} />
+        </div>
+        <div className="grafico">
+          <PizzaChart filters={filters} variavel={"raca"} />
+        </div>
+        <div className="grafico">
+          <PizzaChart filters={filters} variavel={"cotista"} />
+        </div>
         {/* <PizzaChart filters={filters} variavel={"estado_civil_dsc"} /> */}
 
       </div>
