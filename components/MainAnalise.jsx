@@ -16,6 +16,8 @@ export default function MainAnalise({ filters }) {
   const [outliers, setOutliers] = useState([]); // Outliers separados
   const [limites, setLimites] = useState({}); // Limites do boxplot
   const [chiSquareResult, setChiSquareResult] = useState(null); // Resultado do teste Qui-Quadrado
+  const [error, setError] = useState(null); // Estado para mensagem de erro
+  const [showErrorModal, setShowErrorModal] = useState(false); // Controla a exibição do modal
 
   useEffect(() => {
     if (!filters) return; // Evita execução sem filtros
@@ -27,7 +29,8 @@ export default function MainAnalise({ filters }) {
           `http://localhost:3001/boxplot?${new URLSearchParams(filters)}`
         );
         if (!response.ok) {
-          throw new Error("Erro ao buscar os dados");
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Erro ao buscar os dados do BoxPlot");
         }
         const result = await response.json();
 
@@ -38,20 +41,27 @@ export default function MainAnalise({ filters }) {
 
         // Chamada ao endpoint para Qui-Quadrado
         const chiSquareResponse = await fetch(
-          `http://localhost:3001/quiquadrado?variavel=sexo&presenca=555&${new URLSearchParams(filters)}`
+          `http://localhost:3001/quiquadrado?presenca=555&${new URLSearchParams(filters)}`
         );
         if (!chiSquareResponse.ok) {
-          throw new Error("Erro ao calcular Qui-Quadrado");
+          const chiSquareErrorData = await chiSquareResponse.json();
+          throw new Error(chiSquareErrorData.message || "Erro ao calcular Qui-Quadrado");
         }
         const chiSquareData = await chiSquareResponse.json();
         setChiSquareResult(chiSquareData); // Atualiza o resultado do Qui-Quadrado
       } catch (error) {
-        console.error("Erro ao buscar os dados do backend:", error);
+        setError(error.message); // Atualiza o erro
+        setShowErrorModal(true); // Exibe o modal
       }
     };
 
     fetchData();
   }, [filters]); // Refaz a busca sempre que os filtros mudarem
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setShowErrorModal(false);
+  };
 
   // Verifica se os dados estão disponíveis antes de renderizar o gráfico
   if (!filters || data.length === 0 || !limites.q1) {
@@ -64,13 +74,23 @@ export default function MainAnalise({ filters }) {
         <div className="superiorSecao">
           <BoxPlotChart data={data} outliers={outliers} limites={limites} />
           {chiSquareResult && (
-          <ChiSquareTable
-            chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
-          />
+            <ChiSquareTable
+              chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
+            />
           )}
         </div>
       </div>
-      
-   </div>
+
+      {/* Modal de erro */}
+      {showErrorModal && (
+        <div className="modalOverlay">
+          <div className="modalContent">
+            <h2>Erro</h2>
+            <p>{error}</p>
+            <button onClick={closeModal}>Fechar</button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
