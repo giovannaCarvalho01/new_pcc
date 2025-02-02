@@ -6,7 +6,6 @@ export default function FilterText(props) {
   const [searchTerm, setSearchTerm] = useState(""); // Entrada do usuário
   const [selectedItem, setSelectedItem] = useState(null); // Item selecionado
   const [isFocused, setIsFocused] = useState(false); // Controle de foco
-  const items = ["Alice", "Bob", "Charlie", "David", "Eve"]; // Lista de dados
 
   // Filtrar itens com base na entrada
   const filteredItems = items.filter((item) =>

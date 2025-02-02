@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/Dropdown.module.css"; // Arquivo CSS modular
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 export default function DropdownFilter({ placeholder, queryParams, coluna, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,9 +9,9 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const baseEndpoint = "http://localhost:3001/filter?";
-  const endpointAno = "http://localhost:3001/anos";
-  const endpointVariavel = "http://localhost:3001/variavel/";
+  const baseEndpoint = `${API_BASE_URL_PRD}filter?`;
+  const endpointAno = `${API_BASE_URL_PRD}anos`;
+  const endpointVariavel = `${API_BASE_URL_PRD}variavel/`;
 
 
   useEffect(() => {

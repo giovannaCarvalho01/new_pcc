@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 // Registrar os componentes necessários do Chart.js
 ChartJS.register(
@@ -33,7 +34,7 @@ const LineChart = ({ filters }) => {
 
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:3001/LineChart", {
+        const response = await axios.get(`${API_BASE_URL_PRD}LineChart`, {
           params: filters,
         });
 

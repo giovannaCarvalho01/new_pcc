@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 const PizzaChart = ({ filters, variavel }) => {
   const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const PizzaChart = ({ filters, variavel }) => {
       setError(null);
       try {
         const queryParams = new URLSearchParams({ ...filters, variavel }).toString();
-        const response = await fetch(`http://localhost:3001/graficos?presenca=555&${queryParams}`);
+        const response = await fetch(`${API_BASE_URL_PRD}graficos?presenca=555&${queryParams}`);
         
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados");

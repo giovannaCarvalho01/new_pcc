@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import ChiSquareTable from "../components/ChiSquareTable"; // Componente para exibir o resultado
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 // Carrega os componentes apenas no cliente
 const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
@@ -26,7 +27,7 @@ export default function MainAnalise({ filters }) {
       try {
         // Chamada ao endpoint para BoxPlot
         const response = await fetch(
-          `http://localhost:3001/boxplot?${new URLSearchParams(filters)}`
+          `${API_BASE_URL_PRD}boxplot?${new URLSearchParams(filters)}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -41,7 +42,7 @@ export default function MainAnalise({ filters }) {
 
         // Chamada ao endpoint para Qui-Quadrado
         const chiSquareResponse = await fetch(
-          `http://localhost:3001/quiquadrado?presenca=555&${new URLSearchParams(filters)}`
+          `${API_BASE_URL_PRD}quiquadrado?presenca=555&${new URLSearchParams(filters)}`
         );
         if (!chiSquareResponse.ok) {
           const chiSquareErrorData = await chiSquareResponse.json();

@@ -1,6 +1,7 @@
 import TableView from "../components/TableView";
 import axios from "axios";
 import { useState } from "react";
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 export default function MainDownload({ filters }) {
   const [isDownloading, setIsDownloading] = useState(false); // Estado para controlar o popup
@@ -26,7 +27,7 @@ export default function MainDownload({ filters }) {
         presenca: 555,
       }).toString();
 
-      const response = await axios.get(`http://localhost:3001/notas/download?${queryParams}`, {
+      const response = await axios.get(`${API_BASE_URL_PRD}notas/download?${queryParams}`, {
         responseType: "blob",
       });
 

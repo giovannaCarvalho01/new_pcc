@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../styles/TableView.module.css";
+import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
 export default function TableView({ filters }) {
   const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ export default function TableView({ filters }) {
           }).toString();
 
           const response = await axios.get(
-            `http://localhost:3001/notas?${queryParams}`
+            `${API_BASE_URL_PRD}notas?${queryParams}`
           );
           setData(response.data); // Atualiza os dados da tabela
         } catch (err) {
