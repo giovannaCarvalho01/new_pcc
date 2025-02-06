@@ -51,17 +51,19 @@ const PizzaChart = ({ filters, variavel }) => {
   }
 
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="flex justify-center items-center flex-row">
       {/* Gráfico */}
-      <PieChart width={350} height={350}>
+      <PieChart width={400} height={400}>
         <Pie
           data={data}
+          cx={200}
+          cy={150}
+          innerRadius={60}
+          outerRadius={100}
+          fill="#8884d8"
+          paddingAngle={5}
           dataKey="quantidade" // Dados para os valores
           nameKey="variavel"   // Nome que será exibido na legenda
-          cx="50%"
-          cy="50%"
-          outerRadius={75}
-          fill="#8884d8"
           label
         >
           {data.map((entry, index) => (
@@ -69,20 +71,7 @@ const PizzaChart = ({ filters, variavel }) => {
           ))}
         </Pie>
         <Tooltip />
-        {/* Legenda com layout horizontal */}
-        <Legend 
-          layout="horizontal"  // Coloca as legendas em linha horizontal
-          align="center"       // Alinha as legendas ao centro
-          verticalAlign="top"  // Para ter a legenda no topo
-          wrapperStyle={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',  // Centraliza as legendas horizontalmente
-            flexWrap: 'wrap',          // Permite quebra de linha, se necessário
-            padding: '10px 0',         // Espaço extra para as legendas
-            fontSize: '12px',          // Ajuste no tamanho da fonte da legenda
-          }}
-        />
+        <Legend verticalAlign="bottom" height={36} />
       </PieChart>
     </div>
   );

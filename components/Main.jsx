@@ -19,10 +19,10 @@ export default function Main({ filters }) {
           <PizzaChart filters={filters} variavel={"sexo"} />
         </div>
         <div className="grafico">
-          <PizzaChart filters={filters} variavel={"raca"} />
+          <PizzaChart filters={filters} variavel={"cotista"} />
         </div>
         <div className="grafico">
-          <PizzaChart filters={filters} variavel={"cotista"} />
+          <PizzaChart filters={filters} variavel={"raca"} />
         </div>
         {/* <PizzaChart filters={filters} variavel={"estado_civil_dsc"} /> */}
 
