@@ -9,8 +9,8 @@ export default function comparativo(){
                 <Menu></Menu>
             </div>
             <div className="principal">
-                <Sidebar></Sidebar>
-                Em construção
+                {/* <Sidebar></Sidebar> */}
+                Em construção... Irá virar doc
             </div>
         </div>
     )
