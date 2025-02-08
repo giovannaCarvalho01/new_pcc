@@ -82,7 +82,6 @@ export default function MainAnalise({ filters }) {
   return (
     <div className="main">
       <div className="superiorAnalise">
-        <div className="superiorSecao">
           <BoxPlotChart data={data} outliers={outliers} limites={limites} />
           {chiSquareResult && (
             <ChiSquareTable
@@ -94,9 +93,9 @@ export default function MainAnalise({ filters }) {
               fisherResult={fisherResult} // Passa o objeto completo para o componente Fisher
             />
           )}
-        </div>
       </div>
-
+      <div className="inferiorAnalise">
+      </div>
       {/* Modal de erro */}
       {showErrorModal && (
         <div className="modalOverlay">

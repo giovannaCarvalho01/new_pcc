@@ -48,7 +48,7 @@ const BoxPlotChart = ({ data, outliers, limites }) => {
       },
       colors: ["#007BFF", "#1E90FF"], // Tons de azul para BoxPlot e marcadores
       title: {
-        text: "BoxPlot com Outliers",
+        text: "BoxPlot",
         align: "left",
       },
       tooltip: {
@@ -101,7 +101,8 @@ const BoxPlotChart = ({ data, outliers, limites }) => {
         options={chartOptions}
         series={chartSeries}
         type="boxPlot"
-        height={350}
+        height={300}
+        width={300}
       />
     </div>
   );
