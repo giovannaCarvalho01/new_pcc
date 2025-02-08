@@ -176,7 +176,7 @@ export default function SidebarChi({ onFilterApply }) {
       {variavelSelecionado && (
         <>
         <div className="text">
-          <FieldDescription description="Alfa" />
+          <FieldDescription description="Alfa" ativo={true} info={"Alfa (α) é o valor de corte para o teste de Qui-Quadrado. Ele define a probabilidade de cometer um erro ao rejeitar a hipótese nula quando ela é verdadeira. Geralmente, α é 0.05."}/>
         </div>
         <DropdownFilter
           onSelect={setAlfaSelecionado}

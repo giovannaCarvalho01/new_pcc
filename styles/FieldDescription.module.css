@@ -1,0 +1,34 @@
+.field-description {
+    font-size: 14px;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* novos */
+/* Estilo para o container da descrição */
+.fieldDescriptionContainer {
+    display: flex;
+    justify-content: space-between;  /* Espaço entre o texto e o ícone */
+    font-size: 14px;
+    width: 100%; /* Garante que o container ocupe toda a largura disponível */
+    align-items: center; /* Para garantir o alinhamento vertical */
+  }
+  
+  /* Estilo para o label da descrição (texto) */
+  .fieldLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #333; /* Cor consistente do texto da descrição (preto) */
+  }
+  
+  /* Estilo para o ícone de informação */
+  .infoIcon {
+    font-size: 16px;
+    color: #007bff;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px dashed #007bff; /* Opcional: para indicar que é um ícone de informação */
+    margin-left: 8px; /* Adiciona espaço entre o ícone e a descrição */  
+}
+    

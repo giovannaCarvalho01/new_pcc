@@ -1,5 +1,17 @@
-// components/FieldDescription.js
-export default function FieldDescription({ description }) {
-    return <p className="field-description">{description}</p>;
+import styles from "../styles/FieldDescription.module.css"; // Importação do CSS modular
+
+export default function FieldDescription({ description, ativo, info }) {
+  return (
+    <div className={styles.fieldDescriptionContainer}>
+      <span className={styles.fieldLabel}>
+        {description}
+        {/* Condicionalmente exibe o ícone "i" apenas se ativo for true */}
+        {ativo && (
+          <i className={styles.infoIcon} title={info}>
+            i
+          </i>
+        )}
+      </span>
+    </div>
+  );
 }
-  
