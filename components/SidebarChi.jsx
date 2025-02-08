@@ -3,6 +3,7 @@ import { useState } from "react";
 import DropdownFilter from "./DropdownFilter"; // Suponho que você tenha esse componente
 import ButtonFilter from "./ButtonFilter"; // Importando o novo componente
 import FieldDescription from "./FieldDescription"; 
+import EditableDecimalField from "./EditableDecimalField"; 
 
 export default function SidebarChi({ onFilterApply }) {
   const [anoSelecionado, setAnoSelecionado] = useState(null);
@@ -14,7 +15,7 @@ export default function SidebarChi({ onFilterApply }) {
   const [cursoSelecionado, setCursoSelecionado] = useState(null);
   const [variavelSelecionado, setVariavelSelecionado] = useState(null);
   const [alfaSelecionado, setAlfaSelecionado] = useState(null);
-
+  
   // Estado para controle do pop-up
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
@@ -178,10 +179,8 @@ export default function SidebarChi({ onFilterApply }) {
         <div className="text">
           <FieldDescription description="Alfa" ativo={true} info={"Alfa (α) é o valor de corte para o teste de Qui-Quadrado. Ele define a probabilidade de cometer um erro ao rejeitar a hipótese nula quando ela é verdadeira. Geralmente, α é 0.05."}/>
         </div>
-        <DropdownFilter
-          onSelect={setAlfaSelecionado}
-          placeholder="Selecione o alfa"
-          coluna="alfa"
+        <EditableDecimalField
+            onChange={setAlfaSelecionado}  // Passa o setAlfaSelecionado diretamente para onChange
         />
         </>
       )}
