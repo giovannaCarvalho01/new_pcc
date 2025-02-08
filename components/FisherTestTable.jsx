@@ -4,8 +4,6 @@ const FisherTestTable = ({ fisherResult }) => {
   const {
     metodo,
     valor_p,
-    frequencias_esperadas,
-    frequencias_observadas,
     resultado_significativo,
   } = fisherResult;
 
@@ -37,25 +35,6 @@ const FisherTestTable = ({ fisherResult }) => {
           <tr>
             <td style={{ padding: "5px" }}><strong>Valor-p</strong></td>
             <td style={{ padding: "5px" }}>{valor_p}</td>
-          </tr>
-
-          {/* Frequências Observadas e Esperadas */}
-          <tr>
-            <td style={{ padding: "5px" }}><strong>Frequências Observadas</strong></td>
-            <td style={{ padding: "5px" }}>
-              {frequencias_observadas.map((row, index) => (
-                <div key={index}>{`[${row.join(", ")}]`}</div>
-              ))}
-            </td>
-          </tr>
-
-          <tr>
-            <td style={{ padding: "5px" }}><strong>Frequências Esperadas</strong></td>
-            <td style={{ padding: "5px" }}>
-              {frequencias_esperadas.map((row, index) => (
-                <div key={index}>{`[${row.join(", ")}]`}</div>
-              ))}
-            </td>
           </tr>
 
           {/* Resultado Significativo */}

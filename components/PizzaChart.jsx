@@ -53,7 +53,7 @@ const PizzaChart = ({ filters, variavel }) => {
   return (
     <div className="flex justify-center items-center flex-row">
       {/* Gráfico */}
-      <PieChart width={400} height={400}>
+      <PieChart width={350} height={350}>
         <Pie
           data={data}
           cx={200}

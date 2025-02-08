@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import ChiSquareTable from "../components/ChiSquareTable"; // Componente para exibir o resultado
 import FisherTestTable from "../components/FisherTestTable"; // Componente para exibir o Fisher Test
 import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
-
+import FrequencyTable from "../components/FrequencyTable";
 // Carrega os componentes apenas no cliente
 const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
   ssr: false,
@@ -95,7 +95,32 @@ export default function MainAnalise({ filters }) {
           )}
       </div>
       <div className="inferiorAnalise">
+        {chiSquareResult && (
+          <>
+            <FrequencyTable
+              title="Frequências Observadas (Qui-Quadrado)"
+              data={chiSquareResult.frequencias_observadas}
+            />
+            <FrequencyTable
+              title="Frequências Esperadas (Qui-Quadrado)"
+              data={chiSquareResult.frequencias_esperadas}
+            />
+          </>
+        )}
+        {fisherResult && (
+          <>
+            <FrequencyTable
+              title="Frequências Observadas (Fisher)"
+              data={fisherResult.frequencias_observadas}
+            />
+            <FrequencyTable
+              title="Frequências Esperadas (Fisher)"
+              data={fisherResult.frequencias_esperadas}
+            />
+          </>
+        )}
       </div>
+
       {/* Modal de erro */}
       {showErrorModal && (
         <div className="modalOverlay">
