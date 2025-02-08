@@ -11,20 +11,31 @@ const BoxPlotChart = ({ data, outliers, limites }) => {
   const [chartSeries, setChartSeries] = useState([]);
 
   useEffect(() => {
-    const { lowerBound, upperBound } = limites;
+    const { lowerBound, upperBound, q1, q3 } = limites;
+
+    const sortedData = [...data].sort((a, b) => a - b);
+    const min = sortedData.find((value) => value >= lowerBound);
+    const max = sortedData.reverse().find((value) => value <= upperBound);
+    const median = sortedData[Math.floor(sortedData.length / 2)];
 
     // Dados do BoxPlot
     const boxPlotData = [
       {
         x: "",
-        y: [lowerBound, ...data, upperBound],
+        y: [
+          parseFloat(lowerBound.toFixed(2)),
+          parseFloat(q1.toFixed(2)),
+          parseFloat(median.toFixed(2)),
+          parseFloat(q3.toFixed(2)),
+          parseFloat(upperBound.toFixed(2)),
+        ],
       },
     ];
 
     // Dados dos Outliers
     const outliersData = outliers.map((outlier) => ({
       x: "",
-      y: outlier,
+      y: parseFloat(outlier.toFixed(2)),
     }));
 
     // Configuração do gráfico
