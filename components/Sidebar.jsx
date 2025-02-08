@@ -61,7 +61,9 @@ export default function Sidebar({ onFilterApply }) {
   return (
     <div className="sidebar">
       <h4>Filtros</h4>
-      <FieldDescription description="Ano" />
+      <div className="text">
+        <FieldDescription description="Ano" />
+      </div>
       <DropdownFilter
         placeholder="Selecione o ano"
         onSelect={handleAnoSelecionado}
@@ -80,46 +82,76 @@ export default function Sidebar({ onFilterApply }) {
         </div>
       )}
       {anoSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="Região" />
+        </div>
         <DropdownFilter
           onSelect={setRegiaoSelecionado}
           placeholder="Selecione a região"
           queryParams={`coluna=dsc_regiao&ano=${anoSelecionado}`}
         />
+        </>
       )}
       {regiaoSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="UF" />
+        </div>
         <DropdownFilter
           onSelect={setUFSelecionado}
           placeholder="Selecione a UF"
           queryParams={`coluna=dsc_uf&ano=${anoSelecionado}&regiao=${regiaoSelecionado}`}
         />
+        </>
       )}
       {ufSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="Municipio" />
+        </div>
         <DropdownFilter
           onSelect={setMunicipioSelecionado}
           placeholder="Selecione o município"
           queryParams={`coluna=dsc_municipio&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}`}
         />
+        </>
       )}
       {municipioSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="Categoria Administrativa" />
+        </div>
         <DropdownFilter
           onSelect={setCatAdmSelecionado}
           placeholder="Selecione a categoria adm"
           queryParams={`coluna=dsc_cat_adm&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}`}
         />
+        </>
       )}
       {catAdmSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="IES" />
+        </div>
         <DropdownFilter
           onSelect={setIesSelecionado}
           placeholder="Selecione a IES"
           queryParams={`coluna=cod_ies&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}`}
         />
+        </>
       )}
       {iesSelecionado && (
+        <>
+        <div className="text">
+          <FieldDescription description="Curso" />
+        </div>
         <DropdownFilter
           onSelect={setCursoSelecionado}
           placeholder="Selecione o curso"
           queryParams={`coluna=dsc_grupo&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}&cod_ies=${iesSelecionado}`}
         />
+        </>
       )}
       
       {/* Usando o ButtonFilter */}
