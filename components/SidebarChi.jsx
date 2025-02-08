@@ -71,10 +71,14 @@ export default function SidebarChi({ onFilterApply }) {
     setVariavelSelecionado(null);  // Limpa os filtros subsequentes
     setAlfaSelecionado(null);
   };
-
+  
   const handleVariavelSelecionado = (variavel) => {
     setVariavelSelecionado(variavel);
-    setAlfaSelecionado(null);  // Limpa o alfa
+    resetAlfa();  // Limpa o alfa
+  };
+  
+  const resetAlfa = () => {
+    setAlfaSelecionado("0.00");  // Resetando para o valor inicial
   };
 
   const handleFiltrar = () => {
@@ -120,6 +124,7 @@ export default function SidebarChi({ onFilterApply }) {
     setAlfaSelecionado(null);
   };
 
+  
   return (
     <div className="sidebar">
       <h4>Filtros</h4>
@@ -232,6 +237,7 @@ export default function SidebarChi({ onFilterApply }) {
           </div>
           <EditableDecimalField
             onChange={setAlfaSelecionado}  // Atualiza o alfaSelecionado
+            value={alfaSelecionado} // Passa o valor atual para o EditableDecimalField
           />
         </>
       )}
