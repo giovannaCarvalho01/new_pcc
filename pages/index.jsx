@@ -1,6 +1,4 @@
 import Menu from "../components/Menu"
-import Sidebar from "../components/Sidebar"
-import MainDownload from "../components/MainDownload"
 
 export default function comparativo(){
     return (
