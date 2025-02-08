@@ -2,6 +2,7 @@
 import { useState } from "react";
 import DropdownFilter from "./DropdownFilter"; // Suponho que você tenha esse componente
 import ButtonFilter from "./ButtonFilter"; // Importando o novo componente
+import FieldDescription from "./FieldDescription"; 
 
 export default function Sidebar({ onFilterApply }) {
   const [anoSelecionado, setAnoSelecionado] = useState(null);
@@ -60,6 +61,7 @@ export default function Sidebar({ onFilterApply }) {
   return (
     <div className="sidebar">
       <h4>Filtros</h4>
+      <FieldDescription description="Ano" />
       <DropdownFilter
         placeholder="Selecione o ano"
         onSelect={handleAnoSelecionado}

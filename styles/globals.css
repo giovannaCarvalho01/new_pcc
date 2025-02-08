@@ -241,6 +241,19 @@ a {
 
 /* FIM POP UP */
 
+/* styles/Sidebar.css */
+.text{
+  display: flex;
+  /* background-color: black; */
+  width: 90%;
+  padding-left: 5px;
+}
+.field-description {
+  font-size: 14px;
+  align-items: flex-start;
+  text-align: left;
+}
+
 
 /* Media Queries */
 
