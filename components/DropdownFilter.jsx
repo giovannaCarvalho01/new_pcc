@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../styles/Dropdown.module.css"; // Arquivo CSS modular
 import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
-export default function DropdownFilter({ placeholder, queryParams, coluna, onSelect }) {
+export default function DropdownFilter({ placeholder, queryParams, coluna, onSelect, selectedItem: propSelectedItem }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [items, setItems] = useState([]);
@@ -13,14 +13,12 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
   const endpointAno = `${API_BASE_URL_PRD}anos`;
   const endpointVariavel = `${API_BASE_URL_PRD}variavel/`;
 
-
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
       setError(null);
 
       let fullEndpoint;
-
       let fetchedItems = [];
 
       // Se a coluna for "alfa", use um conjunto fixo de valores
@@ -36,7 +34,7 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
         setLoading(false); // Não precisa aguardar carregamento, já temos os dados
         return;
       }
-      
+
       // Mudando o endpoint dependendo do valor de "coluna"
       if (coluna === "ano") {
         fullEndpoint = endpointAno; // Endpoint para anos
@@ -62,6 +60,13 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
 
     fetchItems();
   }, [queryParams, coluna]);
+
+  useEffect(() => {
+    // Se o selectedItem do pai for null, resetamos o selectedItem local
+    if (propSelectedItem === null) {
+      setSelectedItem(null);
+    }
+  }, [propSelectedItem]);  // Dependência para monitorar quando o valor de selectedItem for null
 
   const handleSelect = (value) => {
     setSelectedItem(value);
