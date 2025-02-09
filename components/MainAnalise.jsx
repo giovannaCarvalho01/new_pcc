@@ -98,11 +98,11 @@ export default function MainAnalise({ filters }) {
         {chiSquareResult && (
           <>
             <FrequencyTable
-              title="Frequências Observadas (Qui-Quadrado)"
+              title="Frequências Observadas"
               data={chiSquareResult.frequencias_observadas}
             />
             <FrequencyTable
-              title="Frequências Esperadas (Qui-Quadrado)"
+              title="Frequências Esperadas"
               data={chiSquareResult.frequencias_esperadas}
             />
           </>

@@ -305,20 +305,20 @@ a {
 .superiorAnalise{
   display: flex;
   flex-direction: row;
-  height: 50vh;
+  flex-wrap: wrap;
+  /* height: 50vh; */
   /* background-color: aqua; */
   justify-content: space-around;
-  padding-top: 30px;
+  /* padding-top: 30px; */
   padding-right: 10px;
 }
   
 .inferiorAnalise{
   display: flex;
   flex-direction: column;
-  height: 45vh;
-  /* background-color: red; */
+  flex-wrap: wrap;
   justify-content: space-around;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   padding-right: 10px;
 }
 

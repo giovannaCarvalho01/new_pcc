@@ -12,7 +12,7 @@ const FrequencyTable = ({ title, data }) => {
       <h3>{title}</h3>
       <table
         style={{
-          margin: "10px 0",
+          margin: "5px 0",
           borderCollapse: "collapse",
           width: "100%",
           textAlign: "center",
