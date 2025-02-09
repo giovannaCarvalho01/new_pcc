@@ -21,6 +21,41 @@ export default function MainAnalise({ filters }) {
   const [fisherResult, setFisherResult] = useState(null); // Resultado do Fisher
   const [error, setError] = useState(null); // Estado para mensagem de erro
   const [showErrorModal, setShowErrorModal] = useState(false); // Controla a exibição do modal
+  const [isValid, setIsValid] = useState(true); // Flag para validação
+
+  // Função para validar os dados do Qui-Quadrado
+  const validateChiSquareData = (chiSquareData) => {
+    const { frequencias_esperadas } = chiSquareData;
+
+    let belowFiveCount = 0;
+    let totalFrequencias = 0;
+    let belowOneCount = 0; // Variável para contar os valores abaixo de 1
+
+    // Iterar sobre a matriz de frequências esperadas
+    frequencias_esperadas.matriz.forEach((row) => {
+      row.forEach((value) => {
+        totalFrequencias += value; // Soma as frequências para o total
+        if (value < 5) {
+          belowFiveCount += 1; // Conta os valores abaixo de 5
+        }
+        if (value < 1) {
+          belowOneCount += 1; // Conta os valores abaixo de 1
+        }
+      });
+    });
+
+    // Exibir valores para diagnóstico
+    console.log("Total Frequências Esperadas: ", totalFrequencias);
+    console.log("Valores abaixo de 5: ", belowFiveCount);
+    console.log("Valores abaixo de 1: ", belowOneCount);
+
+    // Condição para validar as regras:
+    const isBelowFiveValid = belowFiveCount / totalFrequencias < 0.2; // Verifica se menos de 20% são abaixo de 5
+    const isBelowOneValid = belowOneCount === 0; // Verifica se nenhum valor é inferior a 1
+
+    // A validação é verdadeira se ambas as condições forem atendidas
+    return isBelowFiveValid && isBelowOneValid;
+  };
 
   useEffect(() => {
     if (!filters) return; // Evita execução sem filtros
@@ -51,12 +86,16 @@ export default function MainAnalise({ filters }) {
           throw new Error(chiSquareErrorData.message || "Erro ao calcular Qui-Quadrado");
         }
         const chiSquareData = await chiSquareResponse.json();
-        
+
         // Verificar se o resultado é Fisher ou Qui-Quadrado
         if (chiSquareData.metodo === "Fisher Exact Test") {
           setFisherResult(chiSquareData); // Se for Fisher
           setChiSquareResult(null); // Limpa o resultado do Qui-Quadrado
         } else if (chiSquareData.metodo === "Chi-Square Test") {
+          // Calcula a validação para o Qui-Quadrado
+          const isValid = validateChiSquareData(chiSquareData);
+          setIsValid(isValid); // Define se a regra foi atendida
+
           setChiSquareResult(chiSquareData); // Se for Qui-Quadrado
           setFisherResult(null); // Limpa o resultado do Fisher
         }
@@ -75,24 +114,46 @@ export default function MainAnalise({ filters }) {
   };
 
   // Verifica se os dados estão disponíveis antes de renderizar o gráfico
-  if (!filters || data.length === 0 || !limites.q1) {
-    return <div>Selecione os filtros para visualizar o gráfico.</div>;
+  if (!filters || data.length === 0 || !limites.q1 || !chiSquareResult) {
+    return (
+      <div className="main">
+        <div>Selecione os filtros para visualizar o gráfico.</div>
+        {error && (
+          <div className="modalOverlay">
+            <div className="modalContent">
+              <h2>Erro</h2>
+              <p>{error}</p>
+              <button onClick={closeModal}>Fechar</button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Se a validação falhou, mostra a mensagem e não exibe gráficos/tabelas
+  if (!isValid) {
+    return (
+      <div className="main">
+        <div>As condições para o Qui-Quadrado não foram atendidas.</div>
+      </div>
+    );
   }
 
   return (
     <div className="main">
       <div className="superiorAnalise">
-          <BoxPlotChart data={data} outliers={outliers} limites={limites} />
-          {chiSquareResult && (
-            <ChiSquareTable
-              chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
-            />
-          )}
-          {fisherResult && (
-            <FisherTestTable
-              fisherResult={fisherResult} // Passa o objeto completo para o componente Fisher
-            />
-          )}
+        <BoxPlotChart data={data} outliers={outliers} limites={limites} />
+        {chiSquareResult && (
+          <ChiSquareTable
+            chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
+          />
+        )}
+        {fisherResult && (
+          <FisherTestTable
+            fisherResult={fisherResult} // Passa o objeto completo para o componente Fisher
+          />
+        )}
       </div>
       <div className="inferiorAnalise">
         {chiSquareResult && (

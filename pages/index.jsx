@@ -1,4 +1,5 @@
 import Menu from "../components/Menu"
+import Agrupamento from "../components/Agrupamento"
 
 export default function comparativo(){
     return (
@@ -8,7 +9,8 @@ export default function comparativo(){
             </div>
             <div className="principal">
                 {/* <Sidebar></Sidebar> */}
-                Em construção... Irá virar doc
+                <Agrupamento />
+                {/* Em construção... Irá virar doc */}
             </div>
         </div>
     )
