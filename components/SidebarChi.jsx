@@ -12,6 +12,7 @@ export default function SidebarChi({ onFilterApply }) {
   const [catAdmSelecionado, setCatAdmSelecionado] = useState(null);
   const [iesSelecionado, setIesSelecionado] = useState(null);
   const [cursoSelecionado, setCursoSelecionado] = useState(null);
+  const [notasSelecionado, setNotasSelecionado] = useState(null);
   const [variavelSelecionado, setVariavelSelecionado] = useState(null);
   const [alfaSelecionado, setAlfaSelecionado] = useState(null);
 
@@ -28,6 +29,7 @@ export default function SidebarChi({ onFilterApply }) {
     setCatAdmSelecionado(null);  // Limpa a categoria administrativa
     setIesSelecionado(null);  // Limpa IES
     setCursoSelecionado(null);  // Limpa o curso
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);  // Limpa a variável
     setAlfaSelecionado(null);  // Limpa o alfa
   };
@@ -38,6 +40,7 @@ export default function SidebarChi({ onFilterApply }) {
     setCatAdmSelecionado(null);
     setIesSelecionado(null);
     setCursoSelecionado(null);
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);
     setAlfaSelecionado(null);
   };
@@ -47,6 +50,7 @@ export default function SidebarChi({ onFilterApply }) {
     setCatAdmSelecionado(null);  // Limpa os filtros subsequentes
     setIesSelecionado(null);
     setCursoSelecionado(null);
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);
     setAlfaSelecionado(null);
   };
@@ -55,6 +59,7 @@ export default function SidebarChi({ onFilterApply }) {
     setCatAdmSelecionado(catAdm);
     setIesSelecionado(null);  // Limpa os filtros subsequentes
     setCursoSelecionado(null);
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);
     setAlfaSelecionado(null);
   };
@@ -62,19 +67,27 @@ export default function SidebarChi({ onFilterApply }) {
   const handleIesSelecionado = (ies) => {
     setIesSelecionado(ies);
     setCursoSelecionado(null);  // Limpa os filtros subsequentes
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);
     setAlfaSelecionado(null);
   };
 
   const handleCursoSelecionado = (curso) => {
     setCursoSelecionado(curso);
+    setNotasSelecionado(null);
     setVariavelSelecionado(null);  // Limpa os filtros subsequentes
     setAlfaSelecionado(null);
   };
-  
+
   const handleVariavelSelecionado = (variavel) => {
     setVariavelSelecionado(variavel);
+    setNotasSelecionado(null);
     resetAlfa();  // Limpa o alfa
+  };
+
+  const handleNotasSelecionado = (notas) => {
+    setNotasSelecionado(notas);
+    resetAlfa();
   };
   
   const resetAlfa = () => {
@@ -108,6 +121,7 @@ export default function SidebarChi({ onFilterApply }) {
       iesSelecionado &&
       cursoSelecionado &&
       variavelSelecionado &&
+      notasSelecionado &&
       alfaSelecionado
     );
   };
@@ -121,6 +135,7 @@ export default function SidebarChi({ onFilterApply }) {
     setIesSelecionado(null);
     setCursoSelecionado(null);
     setVariavelSelecionado(null);
+    setNotasSelecionado(null);
     setAlfaSelecionado(null);
   };
 
@@ -231,6 +246,20 @@ export default function SidebarChi({ onFilterApply }) {
       )}
 
       {variavelSelecionado && (
+        <>
+          <div className="text">
+            <FieldDescription description="Range de Intervalo de Notas" />
+          </div>
+          <DropdownFilter
+            selectedItem={notasSelecionado}  // Passando selectedItem para a variável
+            onSelect={handleNotasSelecionado}
+            placeholder="Selecione o range"
+            coluna="notas"
+          />
+        </>
+      )}
+
+      {notasSelecionado && (
         <>
           <div className="text">
             <FieldDescription description="Alfa" ativo={true} info={"Alfa (α) é o valor de corte para o teste de Qui-Quadrado. Ele define a probabilidade de cometer um erro ao rejeitar a hipótese nula quando ela é verdadeira. Geralmente, α é 0.05."} />

@@ -22,13 +22,13 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
       let fetchedItems = [];
 
       // Se a coluna for "alfa", use um conjunto fixo de valores
-      if (coluna === "alfa") {
+      if (coluna === "notas") {
         fetchedItems = [
-          { value: "0.001", label: "0.001" },
-          { value: "0.01", label: "0.01" },
-          { value: "0.02", label: "0.02" },
-          { value: "0.05", label: "0.05" },
-          { value: "0.10", label: "0.10" },
+          // { value: "1", label: "1" },
+          { value: "2", label: "2" },
+          { value: "3", label: "3" },
+          { value: "4", label: "4" },
+          { value: "5", label: "5" },
         ];
         setItems(fetchedItems);
         setLoading(false); // Não precisa aguardar carregamento, já temos os dados
