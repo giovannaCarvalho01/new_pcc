@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Agrupamento.module.css';
 
-const Agrupamento = () => {
+const Agrupamento = ({ frequenciasEsperadas }) => {
   const [numGroups, setNumGroups] = useState(1);
-  const [variables, setVariables] = useState(['Var1', 'Var2', 'Var3', 'Var4']); // Variáveis já no grupo 1
-  const [groups, setGroups] = useState({ group1: ['Var1', 'Var2', 'Var3', 'Var4'] }); // Variáveis já no grupo 1
+  const [variables, setVariables] = useState([]); // Variáveis das colunas das frequências esperadas
+  const [groups, setGroups] = useState({ group1: [] }); // Inicializa o grupo 1 vazio
   const [selectedVariable, setSelectedVariable] = useState(null); // Variável selecionada
   const [errorMessage, setErrorMessage] = useState(null); // Mensagem de erro
+
+  // Inicializa as variáveis a partir das colunas das frequências esperadas
+  useEffect(() => {
+    if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
+      setVariables(frequenciasEsperadas.colunas); // Usando colunas das frequências esperadas como variáveis
+      setGroups({ group1: frequenciasEsperadas.colunas }); // Inicializa o grupo 1 com todas as variáveis
+    }
+  }, [frequenciasEsperadas]);
 
   // Função para manipular a mudança na quantidade de agrupamentos
   const handleNumGroupsChange = (e) => {
     const newNumGroups = parseInt(e.target.value, 10);
     const maxGroups = variables.length;
 
-    // Se o número de agrupamentos for maior que o número de variáveis, ajusta para o número máximo possível
     if (newNumGroups > maxGroups) {
       setNumGroups(maxGroups);
       alert(`O número máximo de agrupamentos é ${maxGroups} devido ao número de variáveis.`);
@@ -24,12 +31,12 @@ const Agrupamento = () => {
     setGroups((prevGroups) => {
       const updatedGroups = { ...prevGroups };
 
-      // Adiciona novos grupos, se necessário
+      // Adiciona novos grupos se necessário
       for (let i = Object.keys(updatedGroups).length + 1; i <= newNumGroups; i++) {
         updatedGroups[`group${i}`] = [];
       }
 
-      // Remove grupos excedentes, se necessário
+      // Remove grupos excedentes
       if (newNumGroups < Object.keys(updatedGroups).length) {
         const groupsToRemove = Object.keys(updatedGroups).slice(newNumGroups);
         groupsToRemove.forEach((group) => {
@@ -43,7 +50,7 @@ const Agrupamento = () => {
   };
 
   const handleVariableClick = (variable) => {
-    setSelectedVariable(variable); // Define a variável selecionada
+    setSelectedVariable(variable);
   };
 
   const moveToGroup = (targetGroup) => {
@@ -56,11 +63,11 @@ const Agrupamento = () => {
           updatedGroups[group] = updatedGroups[group].filter((item) => item !== selectedVariable);
         });
 
-        // Adiciona ao grupo alvo
+        // Adiciona a variável no grupo selecionado
         updatedGroups[targetGroup].push(selectedVariable);
-        setSelectedVariable(null); // Limpa a seleção da variável após a mudança
+        setSelectedVariable(null); // Limpa a variável selecionada após a mudança
 
-        // Valida novamente após a movimentação
+        // Valida a distribuição das variáveis
         const isValid = validateGroups(updatedGroups);
         setErrorMessage(isValid ? null : 'Todas as variáveis devem ser distribuídas em mais de um grupo!');
 
@@ -69,13 +76,13 @@ const Agrupamento = () => {
     }
   };
 
-  // Função para validar os agrupamentos
   const validateGroups = (updatedGroups) => {
-    // Verifica se todos os grupos estão preenchidos
     const groupEntries = Object.entries(updatedGroups);
+
+    // Verifica se todos os grupos estão preenchidos
     for (const [group, variablesInGroup] of groupEntries) {
       if (variablesInGroup.length === 0) {
-        return false; // Grupo vazio
+        return false;
       }
     }
 
@@ -88,12 +95,12 @@ const Agrupamento = () => {
         }
       });
       if (count === 1) {
-        return false; // Variável em apenas um grupo
+        return false;
       }
       return acc;
     }, {});
 
-    return true; // Se todos os grupos estão preenchidos e as variáveis estão distribuídas em mais de um grupo
+    return true; // Se todos os grupos estão preenchidos e as variáveis distribuídas corretamente
   };
 
   const handleSubmit = () => {
@@ -118,7 +125,7 @@ const Agrupamento = () => {
           value={numGroups}
           onChange={handleNumGroupsChange}
           className={styles.input}
-          max={variables.length} // Impede a inserção de valores maiores que o número de variáveis
+          max={variables.length} // Impede inserir valores maiores que o número de variáveis
         />
       </div>
 

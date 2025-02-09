@@ -4,6 +4,7 @@ import ChiSquareTable from "../components/ChiSquareTable"; // Componente para ex
 import FisherTestTable from "../components/FisherTestTable"; // Componente para exibir o Fisher Test
 import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 import FrequencyTable from "../components/FrequencyTable";
+import Agrupamento from "../components/Agrupamento"; // Importando o novo componente Agrupamento
 // Carrega os componentes apenas no cliente
 const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
   ssr: false,
@@ -113,29 +114,20 @@ export default function MainAnalise({ filters }) {
     setShowErrorModal(false);
   };
 
-  // Verifica se os dados estão disponíveis antes de renderizar o gráfico
-  if (!filters || data.length === 0 || !limites.q1 || !chiSquareResult) {
+  // Se a validação falhou, mostra o agrupamento em vez da mensagem de erro
+  if (!isValid) {
     return (
       <div className="main">
-        <div>Selecione os filtros para visualizar o gráfico.</div>
-        {error && (
-          <div className="modalOverlay">
-            <div className="modalContent">
-              <h2>Erro</h2>
-              <p>{error}</p>
-              <button onClick={closeModal}>Fechar</button>
-            </div>
-          </div>
-        )}
+        <Agrupamento frequenciasEsperadas={chiSquareResult?.frequencias_esperadas} />
       </div>
     );
   }
 
-  // Se a validação falhou, mostra a mensagem e não exibe gráficos/tabelas
-  if (!isValid) {
+  // Verifica se os dados estão disponíveis antes de renderizar o gráfico
+  if (!filters || data.length === 0 || !limites.q1 || !chiSquareResult) {
     return (
       <div className="main">
-        <div>As condições para o Qui-Quadrado não foram atendidas.</div>
+        <Agrupamento frequenciasEsperadas={chiSquareResult?.frequencias_esperadas} />
       </div>
     );
   }
