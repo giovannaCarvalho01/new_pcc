@@ -31,6 +31,12 @@ export default function Main({ filters }) {
         <div className="grafico">
           <PizzaChart filters={filters} variavel={"tipo_em"} />
         </div>
+        <div className="grafico">
+          <PizzaChart filters={filters} variavel={"tipo_em"} />
+        </div>
+        <div className="grafico">
+          <PizzaChart filters={filters} variavel={"tipo_em"} />
+        </div>
         {/* Passando os filtros e a variável fixada como 'sexo_dsc' */}
         {/* <PizzaChart filters={filters} variavel={"sexo_dsc"} /> */}
       </div>
