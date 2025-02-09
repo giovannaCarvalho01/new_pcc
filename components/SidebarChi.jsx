@@ -16,6 +16,10 @@ export default function SidebarChi({ onFilterApply }) {
   const [variavelSelecionado, setVariavelSelecionado] = useState(null);
   const [alfaSelecionado, setAlfaSelecionado] = useState(null);
 
+  // Estado para os dropdowns dinâmicos
+  const [numeroDropdowns, setNumeroDropdowns] = useState(1); // Número de dropdowns dinâmicos
+  const [selectedItems, setSelectedItems] = useState([]); // Itens selecionados nos dropdowns dinâmicos
+
   // Função para tratar a seleção do ano
   const handleAnoSelecionado = (ano) => {
     setAnoSelecionado(ano);
@@ -88,6 +92,8 @@ export default function SidebarChi({ onFilterApply }) {
   const handleNotasSelecionado = (notas) => {
     setNotasSelecionado(notas);
     resetAlfa();
+
+    setSelectedItems(Array(notas).fill(null));
   };
   
   const resetAlfa = () => {
@@ -138,6 +144,13 @@ export default function SidebarChi({ onFilterApply }) {
     setNotasSelecionado(null);
     setAlfaSelecionado(null);
   };
+
+  const handleDropdownChange = (index, value) => {
+    const updatedItems = [...selectedItems];
+    updatedItems[index] = value; // Atualiza o valor no índice correspondente
+    setSelectedItems(updatedItems);
+  };
+
 
   
   return (
@@ -256,6 +269,20 @@ export default function SidebarChi({ onFilterApply }) {
             placeholder="Selecione o range"
             coluna="notas"
           />
+        </>
+      )}
+
+            {/* Dropdowns Dinâmicos com base na seleção de 'notasSelecionado' */}
+      {notasSelecionado && (
+        <>
+          <div className="text">
+            <FieldDescription description="Selecione as opções adicionais" />
+          </div>
+          {Array.from({ length: notasSelecionado }, (_, index) => (
+            <DropdownFilter
+            coluna={'operador'}
+            />
+          ))}
         </>
       )}
 

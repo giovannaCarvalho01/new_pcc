@@ -35,6 +35,19 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
         return;
       }
 
+      // Caso especial para operadores
+      if (coluna === "operador") {
+        fetchedItems = [
+          { value: "Menor ou igual a", label: "Menor ou igual a" },
+          { value: "Maior que", label: "Maior que" },
+          { value: "Menor que", label: "Menor que" },
+          { value: "Maior ou igual a", label: "Maior ou igual a" },
+        ];
+        setItems(fetchedItems);
+        setLoading(false); // Não precisa carregar de um endpoint
+        return;
+      }
+
       // Mudando o endpoint dependendo do valor de "coluna"
       if (coluna === "ano") {
         fullEndpoint = endpointAno; // Endpoint para anos
