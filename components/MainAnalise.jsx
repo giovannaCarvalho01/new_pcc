@@ -23,6 +23,7 @@ export default function MainAnalise({ filters }) {
   const [error, setError] = useState(null); // Estado para mensagem de erro
   const [showErrorModal, setShowErrorModal] = useState(false); // Controla a exibição do modal
   const [isValid, setIsValid] = useState(true); // Flag para validação
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
   // Função para validar os dados do Qui-Quadrado
   const validateChiSquareData = (chiSquareData) => {
@@ -62,6 +63,8 @@ export default function MainAnalise({ filters }) {
     if (!filters) return; // Evita execução sem filtros
 
     const fetchData = async () => {
+      setLoading(true); // Define como carregando até completar a validação
+
       try {
         // Chamada ao endpoint para BoxPlot
         const response = await fetch(
@@ -103,6 +106,8 @@ export default function MainAnalise({ filters }) {
       } catch (error) {
         setError(error.message); // Atualiza o erro
         setShowErrorModal(true); // Exibe o modal
+      } finally {
+        setLoading(false); // Finaliza o carregamento
       }
     };
 
@@ -113,6 +118,11 @@ export default function MainAnalise({ filters }) {
   const closeModal = () => {
     setShowErrorModal(false);
   };
+
+  // Se o estado de carregamento estiver true, não renderiza nada
+  if (loading) {
+    return null; // Não renderiza nada enquanto estiver carregando
+  }
 
   // Se a validação falhou, mostra o agrupamento em vez da mensagem de erro
   if (!isValid) {
