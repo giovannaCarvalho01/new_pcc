@@ -6,6 +6,7 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
   const [variables, setVariables] = useState([]); // Variáveis das colunas das frequências esperadas
   const [groups, setGroups] = useState({ group1: [] }); // Inicializa o grupo 1 vazio
   const [selectedVariable, setSelectedVariable] = useState(null); // Variável selecionada
+  const [newMatrix, setNewMatrix] = useState([]); // Nova matriz de frequências esperadas
   const [errorMessage, setErrorMessage] = useState(null); // Mensagem de erro
 
   // Inicializa as variáveis a partir das colunas das frequências esperadas
@@ -103,13 +104,76 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
     return true; // Se todos os grupos estão preenchidos e as variáveis distribuídas corretamente
   };
 
+  // Função para calcular a nova matriz de frequências esperadas após o agrupamento
+  const calculateGroupedMatrix = () => {
+    if (!frequenciasEsperadas || !frequenciasEsperadas.matriz) return;
+
+    const groupedMatrix = frequenciasEsperadas.matriz.map((row) => {
+      return Object.keys(groups).map((groupKey) => {
+        const groupVariables = groups[groupKey];
+        const relevantColumnsIndexes = groupVariables.map((variable) =>
+          frequenciasEsperadas.colunas.indexOf(variable)
+        );
+
+        // Soma as frequências esperadas das variáveis selecionadas para o grupo
+        return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
+      });
+    });
+
+    setNewMatrix(groupedMatrix);
+  };
+
+  // Função para aplicar a regra de Siegel na nova matriz
+  const validateSiegelConditions = () => {
+    let belowFiveCount = 0;
+    let belowOneCount = 0;
+    const totalCells = newMatrix.length * newMatrix[0].length;
+
+    // Percorre cada célula da nova matriz
+    newMatrix.forEach((row) => {
+      row.forEach((cell) => {
+        if (cell < 1) {
+          belowOneCount++;
+        }
+        if (cell < 5) {
+          belowFiveCount++;
+        }
+      });
+    });
+
+    // Verifica as condições de Siegel
+    const isValid = belowOneCount === 0 && belowFiveCount / totalCells <= 0.2;
+
+    return {
+      isValid,
+      belowFiveCount,
+      belowOneCount,
+    };
+  };
+
   const handleSubmit = () => {
     const isValid = validateGroups(groups);
     setErrorMessage(isValid ? null : 'Todas as variáveis devem ser distribuídas em mais de um grupo!');
+    
     if (isValid) {
-      alert('Agrupamentos validados com sucesso!');
+      calculateGroupedMatrix(); // Calcula a nova matriz de frequências agrupadas ao validar
+      const siegelValidation = validateSiegelConditions();
+      if (siegelValidation.isValid) {
+        alert('Agrupamentos validados com sucesso! A regra de Siegel foi atendida.');
+      } else {
+        setErrorMessage(
+          `A regra de Siegel não foi atendida. Células com valor abaixo de 5: ${siegelValidation.belowFiveCount}, Células com valor abaixo de 1: ${siegelValidation.belowOneCount}`
+        );
+      }
     }
   };
+
+  useEffect(() => {
+    // Recalcular a matriz agrupada sempre que os grupos mudarem
+    if (Object.keys(groups).length > 1) {
+      calculateGroupedMatrix();
+    }
+  }, [groups]);
 
   return (
     <div className={styles.container}>
@@ -172,6 +236,31 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
             </React.Fragment>
           );
         })}
+      </div>
+
+      {/* Exibe a nova matriz com as frequências agrupadas */}
+      <div>
+        <h3>Matriz de Frequências Agrupadas:</h3>
+        {newMatrix.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                {Object.keys(groups).map((groupKey) => (
+                  <th key={groupKey}>{`Grupo ${groupKey.replace('group', '')}`}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {newMatrix.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((value, colIndex) => (
+                    <td key={colIndex}>{value.toFixed(2)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {/* Exibe mensagem de erro */}
