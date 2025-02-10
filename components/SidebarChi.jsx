@@ -290,6 +290,7 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[0]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
             </div>
             <div className="dropdownRow">
               <DropdownFilter
@@ -300,6 +301,7 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[0]}
                 initialSelectedIndex={1}
               />
+              <EditableDecimalField />
             </div>
           </div>
         </>
@@ -321,6 +323,7 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[0]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -332,6 +335,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[1]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={2}
                 coluna="operador"
@@ -340,6 +345,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[2]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Última linha com um único Dropdown */}
             <div className="dropdownRow">
@@ -351,6 +358,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[3]}
                 initialSelectedIndex={1}
               />
+              <EditableDecimalField />
+
             </div>
           </div>
         </>
@@ -372,6 +381,7 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[0]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -383,6 +393,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[1]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={2}
                 coluna="operador"
@@ -391,6 +403,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[2]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Terceira linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -402,6 +416,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[3]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={4}
                 coluna="operador"
@@ -410,6 +426,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[4]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Última linha com um único Dropdown */}
             <div className="dropdownRow">
@@ -421,6 +439,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[3]}
                 initialSelectedIndex={1}
               />
+              <EditableDecimalField />
+
             </div>
           </div>
         </>
@@ -442,6 +462,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[0]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -453,6 +475,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[1]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={2}
                 coluna="operador"
@@ -461,6 +485,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[2]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Terceira linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -472,6 +498,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[3]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={4}
                 coluna="operador"
@@ -480,6 +508,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[4]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Quarta linha com dois dropdowns lado a lado */}
             <div className="dropdownRow">
@@ -491,6 +521,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[3]}
                 initialSelectedIndex={3}
               />
+              <EditableDecimalField />
+              <h5>E</h5>
               <DropdownFilter
                 key={4}
                 coluna="operador"
@@ -499,6 +531,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[4]}
                 initialSelectedIndex={0}
               />
+              <EditableDecimalField />
+
             </div>
             {/* Última linha com um único Dropdown */}
             <div className="dropdownRow">
@@ -510,6 +544,8 @@ export default function SidebarChi({ onFilterApply }) {
                 selectedItem={selectedItems[5]}
                 initialSelectedIndex={1}
               />
+              <EditableDecimalField />
+
             </div>
           </div>
         </>

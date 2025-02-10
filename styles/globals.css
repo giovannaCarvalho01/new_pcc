@@ -24,12 +24,16 @@ li {
 .dropdownGroup {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Espaçamento entre linhas */
+  gap: 0.5rem; /* Espaçamento entre linhas */
+  padding: 0px;
+  margin: 0px;
 }
 
 .dropdownRow {
   display: flex;
-  gap: 1rem; /* Espaçamento entre os Dropdowns na mesma linha */
+  gap: 0.5rem;
+  padding: 0px;
+  margin: 0px;
 }
 
 /* INICIO PRINCIPAL */
