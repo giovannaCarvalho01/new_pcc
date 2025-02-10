@@ -285,18 +285,20 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={0}
                 coluna="operador"
-                placeholder="Operador 1"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(0, value)}
                 selectedItem={selectedItems[0]}
+                initialSelectedIndex={0}
               />
             </div>
             <div className="dropdownRow">
               <DropdownFilter
                 key={0}
                 coluna="operador"
-                placeholder="Operador 2"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(0, value)}
                 selectedItem={selectedItems[0]}
+                initialSelectedIndex={1}
               />
             </div>
           </div>
@@ -314,9 +316,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={0}
                 coluna="operador"
-                placeholder="Operador 1"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(0, value)}
                 selectedItem={selectedItems[0]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
@@ -324,16 +327,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={1}
                 coluna="operador"
-                placeholder="Operador 2"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(1, value)}
                 selectedItem={selectedItems[1]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={2}
                 coluna="operador"
-                placeholder="Operador 3"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(2, value)}
                 selectedItem={selectedItems[2]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Última linha com um único Dropdown */}
@@ -341,9 +346,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={3}
                 coluna="operador"
-                placeholder="Operador 4"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(3, value)}
                 selectedItem={selectedItems[3]}
+                initialSelectedIndex={1}
               />
             </div>
           </div>
@@ -361,9 +367,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={0}
                 coluna="operador"
-                placeholder="Operador 1"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(0, value)}
                 selectedItem={selectedItems[0]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
@@ -371,16 +378,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={1}
                 coluna="operador"
-                placeholder="Operador 2"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(1, value)}
                 selectedItem={selectedItems[1]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={2}
                 coluna="operador"
-                placeholder="Operador 3"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(2, value)}
                 selectedItem={selectedItems[2]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Terceira linha com dois dropdowns lado a lado */}
@@ -388,16 +397,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={3}
                 coluna="operador"
-                placeholder="Operador 4"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(3, value)}
                 selectedItem={selectedItems[3]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={4}
                 coluna="operador"
-                placeholder="Operador 5"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(4, value)}
                 selectedItem={selectedItems[4]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Última linha com um único Dropdown */}
@@ -405,9 +416,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={3}
                 coluna="operador"
-                placeholder="Operador 6"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(3, value)}
                 selectedItem={selectedItems[3]}
+                initialSelectedIndex={1}
               />
             </div>
           </div>
@@ -425,9 +437,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={0}
                 coluna="operador"
-                placeholder="Operador 1"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(0, value)}
                 selectedItem={selectedItems[0]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Segunda linha com dois dropdowns lado a lado */}
@@ -435,16 +448,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={1}
                 coluna="operador"
-                placeholder="Operador 2"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(1, value)}
                 selectedItem={selectedItems[1]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={2}
                 coluna="operador"
-                placeholder="Operador 3"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(2, value)}
                 selectedItem={selectedItems[2]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Terceira linha com dois dropdowns lado a lado */}
@@ -452,16 +467,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={3}
                 coluna="operador"
-                placeholder="Operador 4"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(3, value)}
                 selectedItem={selectedItems[3]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={4}
                 coluna="operador"
-                placeholder="Operador 5"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(4, value)}
                 selectedItem={selectedItems[4]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Quarta linha com dois dropdowns lado a lado */}
@@ -469,16 +486,18 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={3}
                 coluna="operador"
-                placeholder="Operador 6"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(3, value)}
                 selectedItem={selectedItems[3]}
+                initialSelectedIndex={3}
               />
               <DropdownFilter
                 key={4}
                 coluna="operador"
-                placeholder="Operador 7"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(4, value)}
                 selectedItem={selectedItems[4]}
+                initialSelectedIndex={0}
               />
             </div>
             {/* Última linha com um único Dropdown */}
@@ -486,9 +505,10 @@ export default function SidebarChi({ onFilterApply }) {
               <DropdownFilter
                 key={5}
                 coluna="operador"
-                placeholder="Operador 8"
+                placeholder="Operador"
                 onSelect={(value) => handleDropdownChange(5, value)}
                 selectedItem={selectedItems[5]}
+                initialSelectedIndex={1}
               />
             </div>
           </div>

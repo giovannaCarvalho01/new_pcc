@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import styles from "../styles/Dropdown.module.css"; // Arquivo CSS modular
 import { API_BASE_URL_PRD } from "../config"; // Importando a URL base
 
-export default function DropdownFilter({ placeholder, queryParams, coluna, onSelect, selectedItem: propSelectedItem }) {
+export default function DropdownFilter({
+  placeholder,
+  queryParams,
+  coluna,
+  onSelect,
+  selectedItem: propSelectedItem,
+  initialSelectedIndex, // Adicionamos o índice para inicializar um valor
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [items, setItems] = useState([]);
@@ -21,10 +28,9 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
       let fullEndpoint;
       let fetchedItems = [];
 
-      // Se a coluna for "alfa", use um conjunto fixo de valores
+      // Se a coluna for "notas", use um conjunto fixo de valores
       if (coluna === "notas") {
         fetchedItems = [
-          // { value: "1", label: "1" },
           { value: "2", label: "2" },
           { value: "3", label: "3" },
           { value: "4", label: "4" },
@@ -80,6 +86,13 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
       setSelectedItem(null);
     }
   }, [propSelectedItem]);  // Dependência para monitorar quando o valor de selectedItem for null
+
+  useEffect(() => {
+    // Se coluna for "operador", podemos definir um valor selecionado inicial com base no índice
+    if (coluna === "operador" && initialSelectedIndex != null && items.length > 0) {
+      setSelectedItem(items[initialSelectedIndex]?.value);
+    }
+  }, [coluna, initialSelectedIndex, items]);
 
   const handleSelect = (value) => {
     setSelectedItem(value);
