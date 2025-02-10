@@ -38,10 +38,10 @@ export default function DropdownFilter({ placeholder, queryParams, coluna, onSel
       // Caso especial para operadores
       if (coluna === "operador") {
         fetchedItems = [
-          { value: "Menor ou igual a", label: "Menor ou igual a" },
-          { value: "Maior que", label: "Maior que" },
-          { value: "Menor que", label: "Menor que" },
-          { value: "Maior ou igual a", label: "Maior ou igual a" },
+          { value: "<=", label: "<=" },
+          { value: ">", label: ">" },
+          { value: "<", label: "<" },
+          { value: ">=", label: ">=" },
         ];
         setItems(fetchedItems);
         setLoading(false); // Não precisa carregar de um endpoint

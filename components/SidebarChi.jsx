@@ -272,19 +272,230 @@ export default function SidebarChi({ onFilterApply }) {
         </>
       )}
 
-            {/* Dropdowns Dinâmicos com base na seleção de 'notasSelecionado' */}
-      {notasSelecionado && (
+      
+      {/* Dropdowns Dinâmicos com base na seleção de 'notasSelecionado' */}
+      {notasSelecionado === '2' && (
         <>
           <div className="text">
             <FieldDescription description="Selecione as opções adicionais" />
           </div>
-          {Array.from({ length: notasSelecionado }, (_, index) => (
-            <DropdownFilter
-            coluna={'operador'}
-            />
-          ))}
+          <div className="dropdownGroup">
+            {/* Primeira linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={0}
+                coluna="operador"
+                placeholder="Operador 1"
+                onSelect={(value) => handleDropdownChange(0, value)}
+                selectedItem={selectedItems[0]}
+              />
+            </div>
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={0}
+                coluna="operador"
+                placeholder="Operador 2"
+                onSelect={(value) => handleDropdownChange(0, value)}
+                selectedItem={selectedItems[0]}
+              />
+            </div>
+          </div>
         </>
       )}
+
+      {notasSelecionado === '3' && (
+        <>
+          <div className="text">
+            <FieldDescription description="Selecione as opções adicionais" />
+          </div>
+          <div className="dropdownGroup">
+            {/* Primeira linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={0}
+                coluna="operador"
+                placeholder="Operador 1"
+                onSelect={(value) => handleDropdownChange(0, value)}
+                selectedItem={selectedItems[0]}
+              />
+            </div>
+            {/* Segunda linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={1}
+                coluna="operador"
+                placeholder="Operador 2"
+                onSelect={(value) => handleDropdownChange(1, value)}
+                selectedItem={selectedItems[1]}
+              />
+              <DropdownFilter
+                key={2}
+                coluna="operador"
+                placeholder="Operador 3"
+                onSelect={(value) => handleDropdownChange(2, value)}
+                selectedItem={selectedItems[2]}
+              />
+            </div>
+            {/* Última linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={3}
+                coluna="operador"
+                placeholder="Operador 4"
+                onSelect={(value) => handleDropdownChange(3, value)}
+                selectedItem={selectedItems[3]}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {notasSelecionado === '4' && (
+        <>
+          <div className="text">
+            <FieldDescription description="Selecione as opções adicionais" />
+          </div>
+          <div className="dropdownGroup">
+            {/* Primeira linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={0}
+                coluna="operador"
+                placeholder="Operador 1"
+                onSelect={(value) => handleDropdownChange(0, value)}
+                selectedItem={selectedItems[0]}
+              />
+            </div>
+            {/* Segunda linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={1}
+                coluna="operador"
+                placeholder="Operador 2"
+                onSelect={(value) => handleDropdownChange(1, value)}
+                selectedItem={selectedItems[1]}
+              />
+              <DropdownFilter
+                key={2}
+                coluna="operador"
+                placeholder="Operador 3"
+                onSelect={(value) => handleDropdownChange(2, value)}
+                selectedItem={selectedItems[2]}
+              />
+            </div>
+            {/* Terceira linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={3}
+                coluna="operador"
+                placeholder="Operador 4"
+                onSelect={(value) => handleDropdownChange(3, value)}
+                selectedItem={selectedItems[3]}
+              />
+              <DropdownFilter
+                key={4}
+                coluna="operador"
+                placeholder="Operador 5"
+                onSelect={(value) => handleDropdownChange(4, value)}
+                selectedItem={selectedItems[4]}
+              />
+            </div>
+            {/* Última linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={3}
+                coluna="operador"
+                placeholder="Operador 6"
+                onSelect={(value) => handleDropdownChange(3, value)}
+                selectedItem={selectedItems[3]}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {notasSelecionado === '5' && (
+        <>
+          <div className="text">
+            <FieldDescription description="Selecione as opções adicionais" />
+          </div>
+          <div className="dropdownGroup">
+            {/* Primeira linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={0}
+                coluna="operador"
+                placeholder="Operador 1"
+                onSelect={(value) => handleDropdownChange(0, value)}
+                selectedItem={selectedItems[0]}
+              />
+            </div>
+            {/* Segunda linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={1}
+                coluna="operador"
+                placeholder="Operador 2"
+                onSelect={(value) => handleDropdownChange(1, value)}
+                selectedItem={selectedItems[1]}
+              />
+              <DropdownFilter
+                key={2}
+                coluna="operador"
+                placeholder="Operador 3"
+                onSelect={(value) => handleDropdownChange(2, value)}
+                selectedItem={selectedItems[2]}
+              />
+            </div>
+            {/* Terceira linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={3}
+                coluna="operador"
+                placeholder="Operador 4"
+                onSelect={(value) => handleDropdownChange(3, value)}
+                selectedItem={selectedItems[3]}
+              />
+              <DropdownFilter
+                key={4}
+                coluna="operador"
+                placeholder="Operador 5"
+                onSelect={(value) => handleDropdownChange(4, value)}
+                selectedItem={selectedItems[4]}
+              />
+            </div>
+            {/* Quarta linha com dois dropdowns lado a lado */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={3}
+                coluna="operador"
+                placeholder="Operador 6"
+                onSelect={(value) => handleDropdownChange(3, value)}
+                selectedItem={selectedItems[3]}
+              />
+              <DropdownFilter
+                key={4}
+                coluna="operador"
+                placeholder="Operador 7"
+                onSelect={(value) => handleDropdownChange(4, value)}
+                selectedItem={selectedItems[4]}
+              />
+            </div>
+            {/* Última linha com um único Dropdown */}
+            <div className="dropdownRow">
+              <DropdownFilter
+                key={5}
+                coluna="operador"
+                placeholder="Operador 8"
+                onSelect={(value) => handleDropdownChange(5, value)}
+                selectedItem={selectedItems[5]}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+
 
       {notasSelecionado && (
         <>
