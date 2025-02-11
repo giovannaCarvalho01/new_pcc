@@ -11,41 +11,39 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
 
   // Inicializa as variáveis a partir das colunas das frequências esperadas
   useEffect(() => {
-    if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
-      setVariables(frequenciasEsperadas.colunas); // Usando colunas das frequências esperadas como variáveis
-      setGroups({ group1: frequenciasEsperadas.colunas }); // Inicializa o grupo 1 com todas as variáveis
-    }
-  }, [frequenciasEsperadas]);
+    calculateGroupedMatrix();
+  }, [numGroups, groups]);
 
   // Função para manipular a mudança na quantidade de agrupamentos
   const handleNumGroupsChange = (e) => {
     const newNumGroups = parseInt(e.target.value, 10);
     const maxGroups = variables.length;
-
+  
     if (newNumGroups > maxGroups) {
       setNumGroups(maxGroups);
       alert(`O número máximo de agrupamentos é ${maxGroups} devido ao número de variáveis.`);
     } else {
       setNumGroups(newNumGroups);
     }
-
+  
     setGroups((prevGroups) => {
       const updatedGroups = { ...prevGroups };
-
+  
       // Adiciona novos grupos se necessário
       for (let i = Object.keys(updatedGroups).length + 1; i <= newNumGroups; i++) {
         updatedGroups[`group${i}`] = [];
       }
-
+  
       // Remove grupos excedentes
       if (newNumGroups < Object.keys(updatedGroups).length) {
         const groupsToRemove = Object.keys(updatedGroups).slice(newNumGroups);
         groupsToRemove.forEach((group) => {
+          // Move todas as variáveis dos grupos removidos para group1
           updatedGroups.group1 = [...updatedGroups.group1, ...updatedGroups[group]];
           delete updatedGroups[group];
         });
       }
-
+  
       return updatedGroups;
     });
   };
@@ -107,22 +105,21 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
   // Função para calcular a nova matriz de frequências esperadas após o agrupamento
   const calculateGroupedMatrix = () => {
     if (!frequenciasEsperadas || !frequenciasEsperadas.matriz) return;
-
+  
     const groupedMatrix = frequenciasEsperadas.matriz.map((row) => {
       return Object.keys(groups).map((groupKey) => {
         const groupVariables = groups[groupKey];
         const relevantColumnsIndexes = groupVariables.map((variable) =>
           frequenciasEsperadas.colunas.indexOf(variable)
         );
-
+  
         // Soma as frequências esperadas das variáveis selecionadas para o grupo
         return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
       });
     });
-
+  
     setNewMatrix(groupedMatrix);
   };
-
   // Função para aplicar a regra de Siegel na nova matriz
   const validateSiegelConditions = () => {
     let belowFiveCount = 0;
@@ -242,24 +239,24 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
       <div>
         <h3>Matriz de Frequências Agrupadas:</h3>
         {newMatrix.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                {Object.keys(groups).map((groupKey) => (
-                  <th key={groupKey}>{`Grupo ${groupKey.replace('group', '')}`}</th>
+          <table className={styles.table}>
+          <thead>
+            <tr>
+              {Object.keys(groups).map((groupKey) => (
+                <th key={groupKey}>{`Grupo ${groupKey.replace('group', '')}`}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {newMatrix.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((value, colIndex) => (
+                  <td key={colIndex}>{value.toFixed(2)}</td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {newMatrix.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {row.map((value, colIndex) => (
-                    <td key={colIndex}>{value.toFixed(2)}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </tbody>
+        </table>
         )}
       </div>
 
