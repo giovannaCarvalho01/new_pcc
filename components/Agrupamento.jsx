@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/Agrupamento.module.css";
+import jstat from "jstat"; // Importando a biblioteca jstat
 
 const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   const [numGroups, setNumGroups] = useState(1);
@@ -9,6 +10,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   const [newMatrix, setNewMatrix] = useState([]);
   const [newObservedMatrix, setNewObservedMatrix] = useState([]);
   const [chiSquareResults, setChiSquareResults] = useState(null);
+  const [pValue, setPValue] = useState(null); // Novo estado para o p-valor
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
@@ -38,29 +40,25 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
     setGroups((prevGroups) => {
       const updatedGroups = { ...prevGroups };
   
-      // Adiciona novos grupos se necessário
       for (let i = Object.keys(updatedGroups).length + 1; i <= newNumGroups; i++) {
         updatedGroups[`group${i}`] = [];
       }
   
-      // Remove grupos excedentes
       if (newNumGroups < Object.keys(updatedGroups).length) {
         const groupsToRemove = Object.keys(updatedGroups).slice(newNumGroups);
         groupsToRemove.forEach((group) => {
-          // Move todas as variáveis dos grupos removidos para group1
           updatedGroups.group1 = [...updatedGroups.group1, ...updatedGroups[group]];
           delete updatedGroups[group];
         });
       }
   
-      // Reset the grouped matrix
       setNewMatrix([]);
       setNewObservedMatrix([]);
   
       return updatedGroups;
     });
   };
-  
+
   const handleVariableClick = (variable) => {
     setSelectedVariable(variable);
   };
@@ -143,7 +141,11 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
 
     const dof = (newObservedMatrix.length - 1) * (newObservedMatrix[0].length - 1);
 
+    // Calcular o p-valor usando a distribuição Qui-Quadrado com jstat
+    const p = 1 - jstat.chisquare.cdf(chi2, dof); // Usando a CDF para o p-valor
+
     setChiSquareResults({ chi2, dof });
+    setPValue(p); // Definindo o p-valor
   };
 
   const handleSubmit = () => {
@@ -248,8 +250,14 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
       {chiSquareResults && (
         <div>
           <h3>Resultados do Qui-Quadrado:</h3>
-          <p>Estatística: {chiSquareResults.chi2.toFixed(2)}</p>
+          <p>Qui-Quadrado: {chiSquareResults.chi2.toFixed(2)}</p>
           <p>Graus de Liberdade: {chiSquareResults.dof}</p>
+        </div>
+      )}
+
+      {pValue !== null && (
+        <div>
+          <p>p-valor: {pValue.toFixed(4)}</p>
         </div>
       )}
 

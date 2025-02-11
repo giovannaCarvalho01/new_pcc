@@ -8,9 +8,7 @@ export default function comparativo(){
                 <Menu></Menu>
             </div>
             <div className="principal">
-                {/* <Sidebar></Sidebar> */}
-                <Agrupamento />
-                {/* Em construção... Irá virar doc */}
+                Em construção... Irá virar doc
             </div>
         </div>
     )
