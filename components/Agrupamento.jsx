@@ -14,7 +14,14 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
     calculateGroupedMatrix();
   }, [numGroups, groups]);
 
-  // Função para manipular a mudança na quantidade de agrupamentos
+  useEffect(() => {
+    if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
+      setVariables(frequenciasEsperadas.colunas);
+      setGroups({ group1: [...frequenciasEsperadas.colunas] }); // Inicializa todas as variáveis no grupo 1
+    }
+  }, [frequenciasEsperadas]);
+  
+
   const handleNumGroupsChange = (e) => {
     const newNumGroups = parseInt(e.target.value, 10);
     const maxGroups = variables.length;
@@ -103,23 +110,24 @@ const Agrupamento = ({ frequenciasEsperadas }) => {
   };
 
   // Função para calcular a nova matriz de frequências esperadas após o agrupamento
-  const calculateGroupedMatrix = () => {
-    if (!frequenciasEsperadas || !frequenciasEsperadas.matriz) return;
-  
-    const groupedMatrix = frequenciasEsperadas.matriz.map((row) => {
-      return Object.keys(groups).map((groupKey) => {
-        const groupVariables = groups[groupKey];
-        const relevantColumnsIndexes = groupVariables.map((variable) =>
-          frequenciasEsperadas.colunas.indexOf(variable)
-        );
-  
-        // Soma as frequências esperadas das variáveis selecionadas para o grupo
-        return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
-      });
+const calculateGroupedMatrix = () => {
+  if (!frequenciasEsperadas || !frequenciasEsperadas.matriz) return;
+
+  const groupedMatrix = frequenciasEsperadas.matriz.map((row) => {
+    return Object.keys(groups).map((groupKey) => {
+      const groupVariables = groups[groupKey];
+      const relevantColumnsIndexes = groupVariables.map((variable) =>
+        frequenciasEsperadas.colunas.indexOf(variable)
+      );
+
+      // Soma as frequências esperadas das variáveis selecionadas para o grupo
+      return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
     });
-  
-    setNewMatrix(groupedMatrix);
-  };
+  });
+
+  setNewMatrix(groupedMatrix);
+};
+
   // Função para aplicar a regra de Siegel na nova matriz
   const validateSiegelConditions = () => {
     let belowFiveCount = 0;
