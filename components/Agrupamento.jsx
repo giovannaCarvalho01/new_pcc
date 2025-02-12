@@ -54,7 +54,9 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   
       setNewMatrix([]);
       setNewObservedMatrix([]);
-  
+      setChiSquareResults(null);
+      setPValue(null);
+      
       return updatedGroups;
     });
   };
@@ -250,7 +252,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
       </div>
 
       <div>
-        <h3>Matriz de Frequências Agrupadas:</h3>
+        <h3>Matriz de Frequências Esperadas Agrupadas:</h3>
         {newMatrix.length > 0 && (
           <table className={styles.table}>
             <thead>
