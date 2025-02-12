@@ -129,7 +129,16 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
 
   const calculateChiSquare = () => {
     if (!newMatrix.length || !newObservedMatrix.length) return;
-
+  
+    // Validação da regra de Siegel
+    const siegelValid = validateSiegelConditions(newMatrix);
+    if (!siegelValid) {
+      setErrorMessage(
+        "A regra de Siegel não foi atendida: pelo menos uma célula tem valor esperado < 1 ou mais de 20% das células têm valor esperado < 5."
+      );
+      return; // Interrompe o cálculo
+    }
+  
     let chi2 = 0;
     for (let i = 0; i < newObservedMatrix.length; i++) {
       for (let j = 0; j < newObservedMatrix[i].length; j++) {
@@ -138,26 +147,43 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
         }
       }
     }
-
+  
     const dof = (newObservedMatrix.length - 1) * (newObservedMatrix[0].length - 1);
-
+  
     // Calcular o p-valor usando a distribuição Qui-Quadrado com jstat
-    const p = 1 - jstat.chisquare.cdf(chi2, dof); // Usando a CDF para o p-valor
-
+    const p = 1 - jstat.chisquare.cdf(chi2, dof);
+  
     setChiSquareResults({ chi2, dof });
-    setPValue(p); // Definindo o p-valor
+    setPValue(p);
+    setErrorMessage(null); // Limpa mensagens de erro
   };
+  
+  const validateSiegelConditions = (matrix) => {
+    let belowFiveCount = 0;
+    let belowOneCount = 0;
+    const totalCells = matrix.length * matrix[0].length;
+  
+    matrix.forEach((row) => {
+      row.forEach((cell) => {
+        if (cell < 1) belowOneCount++;
+        if (cell < 5) belowFiveCount++;
+      });
+    });
+  
+    return belowOneCount === 0 && belowFiveCount / totalCells <= 0.2;
+  };
+  
 
   const handleSubmit = () => {
     const isValid = validateGroups(groups);
     setErrorMessage(isValid ? null : "Todas as variáveis devem ser distribuídas em mais de um grupo!");
-
+  
     if (isValid) {
-      calculateGroupedMatrix();
-      calculateChiSquare();
-      alert("Agrupamentos validados e qui-quadrado calculado!");
+      calculateGroupedMatrix(); // Gera as matrizes agrupadas
+      calculateChiSquare(); // Calcula o qui-quadrado, incluindo validação da regra de Siegel
     }
   };
+  
 
   return (
     <div className={styles.container}>
@@ -229,6 +255,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
           <table className={styles.table}>
             <thead>
               <tr>
+                <th>Linhas</th> {/* Cabeçalho para as labels das linhas */}
                 {Object.keys(groups).map((groupKey) => (
                   <th key={groupKey}>{`Grupo ${groupKey.replace("group", "")}`}</th>
                 ))}
@@ -237,8 +264,11 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
             <tbody>
               {newMatrix.map((row, rowIndex) => (
                 <tr key={rowIndex}>
+                  <td>{frequenciasEsperadas?.linhas?.[rowIndex]}</td> {/* Label das linhas */}
                   {row.map((value, colIndex) => (
-                    <td key={colIndex}>{value.toFixed(2)}</td>
+                    <td key={`grouped-${colIndex}`}>
+                      {typeof value === "number" ? value.toFixed(2) : "N/A"}
+                    </td>
                   ))}
                 </tr>
               ))}
@@ -257,7 +287,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
 
       {pValue !== null && (
         <div>
-          <p>p-valor: {pValue.toFixed(4)}</p>
+          <p>p-valor: {pValue.toFixed(8)}</p>
         </div>
       )}
 
