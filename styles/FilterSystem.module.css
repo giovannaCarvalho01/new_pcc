@@ -1,0 +1,108 @@
+/* FilterSystem.module.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  gap: 15px;
+  align-items: center;
+}
+
+.filter-row > div {
+  flex: 1;
+  min-width: 150px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.select,
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+.select:focus,
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #eaf4ff;
+}
+
+.input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.arrowButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.3s;
+}
+
+.arrowButton:hover {
+  background-color: #0056b3;
+}
+
+.arrowButton:disabled {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+.arrowButton:first-child {
+  left: -30px; /* Move a seta para cima para a esquerda */
+}
+
+.arrowButton:last-child {
+  right: -30px; /* Move a seta para baixo para a direita */
+}
+
+.input {
+  padding-left: 40px; /* Deixa espaço para as setas */
+  padding-right: 40px; /* Deixa espaço para as setas */
+}
+
+@media (max-width: 600px) {
+  .filter-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-row > div {
+    width: 100%;
+  }
+}
