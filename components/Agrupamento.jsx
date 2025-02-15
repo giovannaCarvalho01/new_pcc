@@ -12,6 +12,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   const [chiSquareResults, setChiSquareResults] = useState(null);
   const [pValue, setPValue] = useState(null); // Novo estado para o p-valor
   const [errorMessage, setErrorMessage] = useState(null);
+  const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
     if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
@@ -25,6 +26,20 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
       calculateGroupedMatrix();
     }
   }, [groups]);
+
+  // Função para verificar a regra do "concordo" e "discordo"
+  const checkForConcordoDiscordo = (updatedGroups) => {
+    let warning = false;
+    Object.values(updatedGroups).forEach((groupVariables) => {
+      const hasConcordo = groupVariables.some((variable) => variable.toLowerCase().startsWith("concordo"));
+      const hasDiscordo = groupVariables.some((variable) => variable.toLowerCase().startsWith("discordo"));
+
+      if (hasConcordo && hasDiscordo) {
+        warning = true;
+      }
+    });
+    return warning;
+  };
 
   const handleNumGroupsChange = (e) => {
     const newNumGroups = parseInt(e.target.value, 10);
@@ -83,6 +98,9 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
         setSelectedVariable(null);
 
         const isValid = validateGroups(updatedGroups);
+        const isWarning = checkForConcordoDiscordo(updatedGroups);
+
+        setWarningMessage(isWarning ? "Aviso: Não é recomendado adicionar variáveis diferentes no mesmo grupo." : null);
         setErrorMessage(isValid ? null : "Todas as variáveis devem ser distribuídas em mais de um grupo!");
 
         return updatedGroups;
@@ -260,6 +278,10 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
           );
         })}
       </div>
+
+      {warningMessage && (
+        <div className={styles.warningMessage}>{warningMessage}</div>  // Exibição da mensagem de aviso
+      )}
 
       <div>
         <h3>Matriz de Frequências Esperadas Agrupadas:</h3>
