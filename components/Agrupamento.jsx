@@ -36,7 +36,12 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
     } else {
       setNumGroups(newNumGroups);
     }
-  
+
+    // Limpar mensagem de erro se a quantidade de agrupamentos for 2 ou mais
+    if (newNumGroups > 1) {
+      setErrorMessage(null);
+    }
+    
     setGroups((prevGroups) => {
       const updatedGroups = { ...prevGroups };
   
@@ -177,6 +182,11 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   
 
   const handleSubmit = () => {
+    if (Object.keys(groups).length === 1) {
+      setErrorMessage("É necessário ter mais de um agrupamento para validar.");
+      return; // Interrompe o processo
+    }
+
     const isValid = validateGroups(groups);
     setErrorMessage(isValid ? null : "Todas as variáveis devem ser distribuídas em mais de um grupo!");
   
