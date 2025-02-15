@@ -98,10 +98,10 @@ export default function MainDownload({ filters }) {
     <div className="MainDownload">
       <div className="export">
         <button className="exportButton" onClick={handleDownload}>
-          Exportar para Xlsx
+          Exportar para xlsx
         </button>
         <button className="exportButton" onClick={handleDownloadCsv}>
-          Exportar para Csv
+          Exportar para csv
         </button>
       </div>
       {filters ? (

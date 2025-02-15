@@ -2,6 +2,7 @@
     font-size: 14px;
     align-items: flex-start;
     text-align: left;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 /* novos */
@@ -12,6 +13,7 @@
     font-size: 14px;
     width: 100%; /* Garante que o container ocupe toda a largura disponível */
     align-items: center; /* Para garantir o alinhamento vertical */
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   /* Estilo para o label da descrição (texto) */
@@ -20,6 +22,7 @@
     align-items: center;
     cursor: pointer;
     color: #333; /* Cor consistente do texto da descrição (preto) */
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   /* Estilo para o ícone de informação */
@@ -30,5 +33,6 @@
     position: relative;
     border-bottom: 1px dashed #007bff; /* Opcional: para indicar que é um ícone de informação */
     margin-left: 8px; /* Adiciona espaço entre o ícone e a descrição */  
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
     

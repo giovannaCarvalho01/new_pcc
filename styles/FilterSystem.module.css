@@ -96,6 +96,12 @@
   padding-right: 40px; /* Deixa espaço para as setas */
 }
 
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 @media (max-width: 600px) {
   .filter-row {
     flex-direction: column;
@@ -106,3 +112,4 @@
     width: 100%;
   }
 }
+

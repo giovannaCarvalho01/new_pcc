@@ -6,6 +6,7 @@
   margin-top: 5px;
   justify-content: center;
   margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdownButton {
@@ -17,6 +18,7 @@
   text-align: left;
   cursor: pointer;
   font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdown {
@@ -34,6 +36,7 @@
   max-height: 100px; /* Adiciona limite de altura */
   overflow-y: auto; /* Habilita barra de rolagem se necessário */
   scrollbar-color: #ccc #f9f9f9; /* Opcional: personaliza a aparência */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdownItem {
@@ -42,6 +45,7 @@
   color: black;
   font-size: 10px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdownItem:hover {
@@ -51,6 +55,7 @@
 .dropdownButton::placeholder {
   font-size: 11px; /* Tamanho do placeholder ajustado */
   color: black; /* Cor do placeholder ajustada para ser mais discreta */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 /* Media Queries */

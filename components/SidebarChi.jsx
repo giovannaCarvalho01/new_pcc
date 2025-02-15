@@ -181,7 +181,7 @@ export default function SidebarChi({ onFilterApply }) {
       {ufSelecionado && (
         <>
           <div className="text">
-            <FieldDescription description="Municipio" />
+            <FieldDescription description="Município" />
           </div>
           <DropdownFilter
             selectedItem={municipioSelecionado}  // Passando selectedItem para o município

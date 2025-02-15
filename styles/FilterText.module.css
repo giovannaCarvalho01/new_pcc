@@ -5,6 +5,7 @@
   width: 90%;
   margin-top: 10px;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 /* Container do input e do ícone de borracha */
@@ -13,6 +14,7 @@
   width: 100%; /* Garante que ocupe toda a largura do container */
   position: relative;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .input {
@@ -22,11 +24,13 @@
   border-radius: 4px;
   font-size: 10px; /* Tamanho de fonte ajustado para melhor legibilidade */
   box-sizing: border-box; /* Garante que o padding não afete a largura total */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .input::placeholder {
   font-size: 11px; /* Tamanho do placeholder ajustado */
   color: #aaa; /* Cor do placeholder ajustada para ser mais discreta */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 /* Estilo do ícone de borracha */
@@ -39,6 +43,7 @@
   cursor: pointer; /* Indica que o ícone é clicável */
   color: #888; /* Cor do ícone */
   z-index: 1; /* Garante que o ícone fique sobre o campo de entrada */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .clearIcon:hover {
@@ -66,6 +71,7 @@
   overflow-y: auto; /* Habilita a barra de rolagem vertical */
   scrollbar-width: thin; /* Opcional: para navegadores que suportam */
   scrollbar-color: #ccc #f9f9f9; /* Opcional: personaliza a aparência */
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdownItem {
@@ -74,6 +80,7 @@
   color: black;
   font-size: 12px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .dropdownItem:hover {
@@ -91,10 +98,12 @@
   .input {
     font-size: 16px; /* Aumenta a fonte para dispositivos móveis */
     padding: 12px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 
   .clearIcon {
     margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }
 
@@ -102,9 +111,11 @@
   .input {
     font-size: 16px; /* Ajusta o tamanho da fonte para tablets */
     padding: 10px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 
   .clearIcon {
     font-size: 18px; /* Ajusta o tamanho do ícone para tablets */
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }

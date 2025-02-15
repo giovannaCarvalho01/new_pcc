@@ -9,6 +9,7 @@
   border-radius: 4px;
   transition: background-color 0.3s ease;
   margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .btnFiltrar:hover {
@@ -19,6 +20,7 @@
 .disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 /* Media Queries */
@@ -30,6 +32,7 @@
     padding: 5px; /* Aumenta o padding para facilitar o clique */
     font-size: 18px; /* Aumenta o tamanho da fonte */
     margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }
 
@@ -40,6 +43,7 @@
     padding: 12px 25px;
     font-size: 15px;
     margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }
 
@@ -50,7 +54,7 @@
     padding: 10px 50px; /* Aumenta o padding para telas maiores */
     font-size: 18px; /* Aumenta o tamanho da fonte para maior legibilidade */
     margin-top: 10px;
-  
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }
 
@@ -61,5 +65,6 @@
     padding: 10px 50px; /* Aumenta o padding ainda mais para telas grandes */
     font-size: 20px; /* Aumenta o tamanho da fonte para maior visibilidade */
     margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
 }

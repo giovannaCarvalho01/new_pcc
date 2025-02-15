@@ -1,7 +1,7 @@
 /* Agrupamento.module.css */
 
 .container {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
@@ -10,6 +10,7 @@
   .header {
     text-align: center;
     margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .inputContainer {
@@ -17,11 +18,13 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .label {
     font-size: 18px;
     margin-right: 10px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .input {
@@ -30,6 +33,7 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .groupsContainer {
@@ -56,6 +60,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     transition: transform 0.2s;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .groupCard:hover {
@@ -66,6 +71,7 @@
     margin-bottom: 15px;
     font-size: 18px;
     color: #333;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .variables {
@@ -82,6 +88,7 @@
     border-radius: 4px;
     background-color: #fff;
     transition: background-color 0.3s ease;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .variable:hover {
@@ -111,6 +118,7 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.2s;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .arrowButton:hover {
@@ -124,6 +132,7 @@
     font-size: 16px;
     text-align: center;
     margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .validateButtonContainer {
@@ -141,6 +150,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
   }
   
   .validateButton:hover {
@@ -152,10 +162,12 @@
 .table {
   border-collapse: collapse;
   width: 100%;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
 
 .table th, .table td {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif; /* Fonte não serifada */
 }
