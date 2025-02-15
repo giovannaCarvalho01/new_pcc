@@ -107,7 +107,7 @@
 
   .dropdown {
     width: 90%; /* Ajusta a largura do dropdown */
-    max-height: 200px; /* Aumenta a altura máxima */
+    max-height: 100px; /* Aumenta a altura máxima */
   }
 
   .dropdownItem {
@@ -133,7 +133,7 @@
 
   .dropdown {
     width: 90%;
-    max-height: 250px; /* Aumenta a altura máxima do dropdown */
+    max-height: 150px; /* Aumenta a altura máxima do dropdown */
   }
 
   .dropdownItem {

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/Agrupamento.module.css";
 import jstat from "jstat"; // Importando a biblioteca jstat
+import ChiSquareTable from "../components/ChiSquareTable";
+import dynamic from "next/dynamic";
 
-const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
+
+const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outliers, limites}) => {
   const [numGroups, setNumGroups] = useState(1);
   const [variables, setVariables] = useState([]);
   const [groups, setGroups] = useState({ group1: [] });
@@ -13,6 +16,12 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
   const [pValue, setPValue] = useState(null); // Novo estado para o p-valor
   const [errorMessage, setErrorMessage] = useState(null);
   const [warningMessage, setWarningMessage] = useState(null);
+
+
+  const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
+    ssr: false,
+  });
+  
 
   useEffect(() => {
     if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
@@ -311,8 +320,38 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas }) => {
         )}
       </div>
 
+      <div>
+      <h3>Matriz de Frequências Observadas Agrupadas:</h3>
+      {newObservedMatrix.length > 0 && (
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Linhas</th> {/* Cabeçalho para as labels das linhas */}
+              {Object.keys(groups).map((groupKey) => (
+                <th key={groupKey}>{`Grupo ${groupKey.replace("group", "")}`}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {newObservedMatrix.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                <td>{frequenciasObservadas?.linhas?.[rowIndex]}</td> {/* Label das linhas */}
+                {row.map((value, colIndex) => (
+                  <td key={`observed-${colIndex}`}>
+                    {typeof value === "number" ? value.toFixed(2) : "N/A"}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+
+
       {chiSquareResults && (
         <div>
+          <BoxPlotChart data={data} outliers={outliers} limites={limites} />
           <h3>Resultados do Qui-Quadrado:</h3>
           <p>Qui-Quadrado: {chiSquareResults.chi2.toFixed(2)}</p>
           <p>Graus de Liberdade: {chiSquareResults.dof}</p>

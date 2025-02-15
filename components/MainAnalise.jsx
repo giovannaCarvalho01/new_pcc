@@ -137,7 +137,11 @@ const MainAnalise = ({ filters }) => {
           </p>
         </div>
         <Agrupamento frequenciasEsperadas={chiSquareResult.frequencias_esperadas} 
-        frequenciasObservadas={chiSquareResult.frequencias_observadas}/>
+        frequenciasObservadas={chiSquareResult.frequencias_observadas}
+        data={data}
+        outliers={outliers}
+        limites={limites}
+        />
       </div>
     );
   }
