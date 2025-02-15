@@ -15,11 +15,19 @@ export default function SidebarChi({ onFilterApply }) {
   const [notasSelecionado, setNotasSelecionado] = useState(null);
   const [variavelSelecionado, setVariavelSelecionado] = useState(null);
   const [alfaSelecionado, setAlfaSelecionado] = useState(null);
-
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  
   // Função para tratar a seleção do ano
   const handleAnoSelecionado = (ano) => {
     setAnoSelecionado(ano);
     resetFiltros();  // Limpa todos os filtros subsequentes
+    // Exibe o pop-up se o ano for 2022 ou 2021
+    if (ano === "2022" || ano === "2021") {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false); // Esconde o pop-up se o ano for diferente
+    }
   };
 
   const handleRegiaoSelecionado = (regiao) => {
@@ -152,6 +160,18 @@ export default function SidebarChi({ onFilterApply }) {
         coluna="ano"
         selectedItem={anoSelecionado}  // Passando selectedItem para garantir que o valor esteja sincronizado
       />
+      {/* Exibe o pop-up se o estado showPopup for true */}
+      {showPopup && (
+        <div className="modalOverlay">
+          <div className="modalContent">
+            <h2>Aviso</h2>
+            <p> Você selecionou um ano que já conta com as mudanças nos arquivos do Enade para atender a LGPD. Conforme descrito pelo Inep:</p>
+            <p>Ressalta-se que a nova estrutura dos Microdados do Enade permite ao pesquisador realizar estudos em relação ao perfil dos cursos e seus resultados, sendo possível agrupar os diferentes arquivos pelo código de curso (CO_CURSO).</p>
+            <p><strong>No entanto, não é possível agrupar as informações no nível de estudante, considerando que cada arquivo está ordenado por variáveis distintas.</strong> Por exemplo, mesmo reordenando por código de curso todos os arquivos, os dados da primeira linha de um dos arquivos não se referem ao mesmo indivíduo dos dados da primeira linha de outro arquivo.</p>
+            <button onClick={() => setShowPopup(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
       {anoSelecionado && (
         <>
           <div className="text">
