@@ -121,6 +121,21 @@ const MainAnalise = ({ filters }) => {
   ) {
     return (
       <div className="main">
+          <div className="explanation">
+          <h3>Explicação sobre o teste Qui-Quadrado</h3>
+          <p>
+            O <strong>teste Qui-Quadrado</strong> pode ser aplicado apenas quando as seguintes condições são atendidas:
+          </p>
+          <ul>
+            <li>1. O número de células com frequência esperada inferior a 5 deve ser inferior a 20% do total de células.</li>
+            <li>2. Nenhuma célula pode ter uma frequência esperada inferior a 1.</li>
+          </ul>
+          <p>
+            Caso essas condições não sejam atendidas com os dados na forma original, o pesquisador deve considerar combinar categorias adjacentes para aumentar as frequências esperadas nas células.
+          </p>
+          <p><strong>Exemplo:</strong> Uma alternativa seria combinar as categorias "Concordo", "Concordo Parcialmente" e "Concordo Totalmente", ou "Discordo", "Discordo Parcialmente" e "Discordo Totalmente", a fim de adequar os dados para o teste [Siegel, 1975].
+          </p>
+        </div>
         <Agrupamento frequenciasEsperadas={chiSquareResult.frequencias_esperadas} 
         frequenciasObservadas={chiSquareResult.frequencias_observadas}/>
       </div>
