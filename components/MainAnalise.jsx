@@ -141,6 +141,7 @@ const MainAnalise = ({ filters }) => {
         data={data}
         outliers={outliers}
         limites={limites}
+        alfa={filters?.alfa}
         />
       </div>
     );

@@ -5,7 +5,7 @@ import ChiSquareTable from "../components/ChiSquareTable";
 import dynamic from "next/dynamic";
 
 
-const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outliers, limites}) => {
+const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outliers, limites, alfa}) => {
   const [numGroups, setNumGroups] = useState(1);
   const [variables, setVariables] = useState([]);
   const [groups, setGroups] = useState({ group1: [] });
@@ -355,6 +355,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
           <h3>Resultados do Qui-Quadrado:</h3>
           <p>Qui-Quadrado: {chiSquareResults.chi2.toFixed(2)}</p>
           <p>Graus de Liberdade: {chiSquareResults.dof}</p>
+          <p>Alfa: {alfa}</p>
         </div>
       )}
 
@@ -363,7 +364,12 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
           <p>p-valor: {pValue.toFixed(8)}</p>
         </div>
       )}
-
+      {/* Condicional para exibir a mensagem baseada no p-valor */}
+      {pValue < alfa ? (
+        <p> O p-valor ({pValue.toFixed(8)}) é menor que o alfa ({alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.</p>
+      ) : (
+        <p> O p-valor ({pValue.toFixed(8)}) é maior que o alfa ({alfa}), portanto, nota do Enade é independente do agrupamento realizado.</p>
+      )}
       {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
 
       <div className={styles.validateButtonContainer}>

@@ -24,7 +24,8 @@ export default function Analise() {
 
     // Atualiza o estado com os filtros ajustados
     setFilters(updatedFilters);
-    console.log("Filtros aplicados:", updatedFilters);
+    // console.log("Filtros aplicados:", updatedFilters);
+    // console.log(filters?.alfa);
   };
 
   return (
