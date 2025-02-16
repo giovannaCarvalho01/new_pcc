@@ -24,15 +24,16 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
   
 
   useEffect(() => {
-    if (frequenciasEsperadas && frequenciasEsperadas.colunas) {
-      setVariables(frequenciasEsperadas.colunas);
-      setGroups({ group1: [...frequenciasEsperadas.colunas] });
+    if (frequenciasEsperadas && frequenciasEsperadas.linhas) {
+      setVariables(frequenciasEsperadas.linhas);
+      setGroups({ group1: [...frequenciasEsperadas.linhas] });
     }
   }, [frequenciasEsperadas]);
 
+  // Substituição da chamada antiga para `calculateGroupedMatrix`
   useEffect(() => {
     if (Object.keys(groups).length > 1) {
-      calculateGroupedMatrix();
+      calculateGroupedMatrixByRows(); // Nova função chamada aqui
     }
   }, [groups]);
 
@@ -129,37 +130,39 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
     return true;
   };
 
-  const calculateGroupedMatrix = () => {
+  // Ajuste principal: lógica de agrupamento por linhas
+  const calculateGroupedMatrixByRows = () => {
     if (!frequenciasEsperadas || !frequenciasEsperadas.matriz) return;
 
-    const groupedMatrix = frequenciasEsperadas.matriz.map((row) =>
-      Object.keys(groups).map((groupKey) => {
-        const groupVariables = groups[groupKey];
-        const relevantColumnsIndexes = groupVariables.map((variable) =>
-          frequenciasEsperadas.colunas.indexOf(variable)
-        );
+    const groupedMatrix = Object.keys(groups).map((groupKey) => {
+      const groupVariables = groups[groupKey];
+      const relevantRowIndexes = groupVariables.map((variable) =>
+        frequenciasEsperadas.linhas.indexOf(variable)
+      );
 
-        return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
-      })
-    );
+      return frequenciasEsperadas.matriz[0].map((_, colIndex) =>
+        relevantRowIndexes.reduce((sum, rowIndex) => sum + frequenciasEsperadas.matriz[rowIndex][colIndex], 0)
+      );
+    });
 
     setNewMatrix(groupedMatrix);
 
     if (frequenciasObservadas) {
-      const groupedObservedMatrix = frequenciasObservadas.matriz.map((row) =>
-        Object.keys(groups).map((groupKey) => {
-          const groupVariables = groups[groupKey];
-          const relevantColumnsIndexes = groupVariables.map((variable) =>
-            frequenciasObservadas.colunas.indexOf(variable)
-          );
+      const groupedObservedMatrix = Object.keys(groups).map((groupKey) => {
+        const groupVariables = groups[groupKey];
+        const relevantRowIndexes = groupVariables.map((variable) =>
+          frequenciasObservadas.linhas.indexOf(variable)
+        );
 
-          return relevantColumnsIndexes.reduce((sum, colIndex) => sum + row[colIndex], 0);
-        })
-      );
+        return frequenciasObservadas.matriz[0].map((_, colIndex) =>
+          relevantRowIndexes.reduce((sum, rowIndex) => sum + frequenciasObservadas.matriz[rowIndex][colIndex], 0)
+        );
+      });
 
       setNewObservedMatrix(groupedObservedMatrix);
     }
   };
+
 
   const calculateChiSquare = () => {
     if (!newMatrix.length || !newObservedMatrix.length) return;
@@ -218,7 +221,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
     setErrorMessage(isValid ? null : "Todas as variáveis devem ser distribuídas em mais de um grupo!");
   
     if (isValid) {
-      calculateGroupedMatrix(); // Gera as matrizes agrupadas
+      calculateGroupedMatrixByRows(); // Gera as matrizes agrupadas
       calculateChiSquare(); // Calcula o qui-quadrado, incluindo validação da regra de Siegel
     }
   };
@@ -292,61 +295,64 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
         <div className={styles.warningMessage}>{warningMessage}</div>  // Exibição da mensagem de aviso
       )}
 
-      <div>
-        <h3>Matriz de Frequências Esperadas Agrupadas:</h3>
-        {newMatrix.length > 0 && (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Linhas</th> {/* Cabeçalho para as labels das linhas */}
-                {Object.keys(groups).map((groupKey) => (
-                  <th key={groupKey}>{`Grupo ${groupKey.replace("group", "")}`}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {newMatrix.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  <td>{frequenciasEsperadas?.linhas?.[rowIndex]}</td> {/* Label das linhas */}
-                  {row.map((value, colIndex) => (
-                    <td key={`grouped-${colIndex}`}>
-                      {typeof value === "number" ? value.toFixed(2) : "N/A"}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
 
-      <div>
-      <h3>Matriz de Frequências Observadas Agrupadas:</h3>
-      {newObservedMatrix.length > 0 && (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Linhas</th> {/* Cabeçalho para as labels das linhas */}
-              {Object.keys(groups).map((groupKey) => (
-                <th key={groupKey}>{`Grupo ${groupKey.replace("group", "")}`}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {newObservedMatrix.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                <td>{frequenciasObservadas?.linhas?.[rowIndex]}</td> {/* Label das linhas */}
-                {row.map((value, colIndex) => (
-                  <td key={`observed-${colIndex}`}>
-                    {typeof value === "number" ? value.toFixed(2) : "N/A"}
-                  </td>
-                ))}
-              </tr>
+<div>
+  <h3>Matriz de Frequências Esperadas Agrupadas:</h3>
+  {newMatrix.length > 0 && (
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Linhas</th> {/* Cabeçalho para as linhas */}
+          {frequenciasEsperadas.colunas.map((col, colIndex) => (
+            <th key={`col-${colIndex}`}>{col}</th> // Colunas baseadas nos valores do JSON
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {newMatrix.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            <td>{`Grupo ${rowIndex + 1}`}</td> {/* Nome da linha ou índice */}
+            {row.map((value, colIndex) => (
+              <td key={`grouped-${colIndex}`}>
+                {typeof value === "number" ? value.toFixed(2) : "N/A"}
+              </td>
             ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</div>
+
+<div>
+  <h3>Matriz de Frequências Observadas Agrupadas:</h3>
+  {newObservedMatrix.length > 0 && (
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Linhas</th> {/* Cabeçalho para as linhas */}
+          {frequenciasObservadas.colunas.map((col, colIndex) => (
+            <th key={`col-${colIndex}`}>{col}</th> // Colunas baseadas nos valores do JSON
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {newObservedMatrix.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            <td>{`Grupo ${rowIndex + 1}`}</td> {/* Nome do grupo com base no índice da linha */}
+            {row.map((value, colIndex) => (
+              <td key={`observed-grouped-${colIndex}`}>
+                {typeof value === "number" ? value.toFixed(2) : "N/A"}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</div>
+
+
 
 
       {chiSquareResults && (
