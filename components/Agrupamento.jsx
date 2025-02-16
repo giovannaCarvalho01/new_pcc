@@ -365,11 +365,14 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
         </div>
       )}
       {/* Condicional para exibir a mensagem baseada no p-valor */}
-      {pValue < alfa ? (
-        <p> O p-valor ({pValue.toFixed(8)}) é menor que o alfa ({alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.</p>
-      ) : (
-        <p> O p-valor ({pValue.toFixed(8)}) é maior que o alfa ({alfa}), portanto, nota do Enade é independente do agrupamento realizado.</p>
+      {pValue !== null && (
+        pValue < alfa ? (
+          <p> O p-valor ({pValue.toFixed(8)}) é menor que o alfa ({alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.</p>
+        ) : (
+          <p> O p-valor ({pValue.toFixed(8)}) é maior que o alfa ({alfa}), portanto, nota do Enade é independente do agrupamento realizado.</p>
+        )
       )}
+
       {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
 
       <div className={styles.validateButtonContainer}>
