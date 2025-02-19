@@ -1,19 +1,14 @@
 import { useState } from "react";
-import Menu from "../components/Menu";
 import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
+import Menu from "../components/Menu";
 
-export default function Dashboard() {
-  const [filters, setFilters] = useState({}); // Agora useState vai funcionar corretamente
-
-  console.log("filters antes de setar:", filters);
+export default function dashboard() {
+  const [filters, setFilters] = useState(null); // Armazena os filtros aplicados
 
   const handleFilterApply = (appliedFilters) => {
-    console.log("Filtros aplicados:", appliedFilters);
     setFilters(appliedFilters); // Atualiza os filtros aplicados
   };
-
-  console.log("Renderizando Dashboard com filters:", filters);
 
   return (
     <div className="center">
@@ -21,8 +16,8 @@ export default function Dashboard() {
         <Menu />
       </div>
       <div className="principal">
-        <Sidebar onFilterApply={handleFilterApply} />
-        <Main filters={filters} /> {/* Passando os filtros para o Main */}
+        <Sidebar onFilterApply={handleFilterApply} /> {/* Passa a função onFilterApply */}
+        <Main filters={filters} /> {/* Passa o estado filters para o Main */}
       </div>
     </div>
   );
