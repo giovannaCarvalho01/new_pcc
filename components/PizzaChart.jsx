@@ -52,7 +52,7 @@ const PizzaChart = ({ filters, variavel }) => {
 
   return (
     <div className="flex justify-center items-center flex-row"
-    style={{ marginBottom: '100px' }}>
+    style={{ marginBottom: '130px' }}>
       {/* <h4>Gráfico de {variavel}</h4> */}
       {/* Gráfico */}
       <PieChart width={350} height={350}>

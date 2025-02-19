@@ -131,7 +131,8 @@ export default function SidebarChi({ onFilterApply }) {
       iesSelecionado &&
       cursoSelecionado &&
       variavelSelecionado &&
-      alfaSelecionado
+      alfaSelecionado &&
+      alfaSelecionado !== "0.00" // Verifica se alfa é diferente de "0.00"
     );
   };
 
