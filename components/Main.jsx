@@ -40,7 +40,7 @@ export default function Main({ filters }) {
           <PizzaChart filters={filters} variavel={"cat_em"} />
         </div>
         <div className="grafico">
-          <h4>Gráfico por cotas</h4>
+          <h4>Gráfico por turno</h4>
           <PizzaChart filters={filters} variavel={"dsc_turno"} />
         </div>
       </div>
