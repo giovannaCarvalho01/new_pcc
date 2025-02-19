@@ -226,7 +226,13 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
     }
   };
   
-
+  const getInitials = (str) => {
+    return str
+      .split(" ") // Divide a string em palavras
+      .map((word) => word[0]?.toUpperCase()) // Pega a primeira letra de cada palavra
+      .join(""); // Junta as iniciais
+  };
+  
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -302,27 +308,40 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
     <table className={styles.table}>
       <thead>
         <tr>
-          <th>Linhas</th> {/* Cabeçalho para as linhas */}
+          <th>Respostas</th> {/* Cabeçalho para as linhas */}
           {frequenciasEsperadas.colunas.map((col, colIndex) => (
             <th key={`col-${colIndex}`}>{col}</th> // Colunas baseadas nos valores do JSON
           ))}
         </tr>
       </thead>
       <tbody>
-        {newMatrix.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            <td>{`Grupo ${rowIndex + 1}`}</td> {/* Nome da linha ou índice */}
-            {row.map((value, colIndex) => (
-              <td key={`grouped-${colIndex}`}>
-                {typeof value === "number" ? value.toFixed(2) : "N/A"}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {newMatrix.map((row, rowIndex) => {
+          const groupDescription = `Grupo ${rowIndex + 1}`;
+
+          // Verifica se o grupo existe
+          const groupVariables = groups[`group${rowIndex + 1}`];
+
+          // Se o grupo não existir, definimos um valor padrão vazio para as iniciais
+          const groupInitials = groupVariables 
+            ? groupVariables.map((variable) => getInitials(variable)).join(", ")
+            : "Sem Variáveis"; // Caso o grupo não tenha variáveis ou não exista
+
+          return (
+            <tr key={rowIndex}>
+              <td>{groupDescription} ({groupInitials})</td> {/* Nome do grupo e suas iniciais */}
+              {row.map((value, colIndex) => (
+                <td key={`grouped-${colIndex}`}>
+                  {typeof value === "number" ? value.toFixed(2) : "N/A"}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   )}
 </div>
+
 
 <div>
   <h3>Matriz de Frequências Observadas Agrupadas:</h3>
@@ -330,27 +349,40 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
     <table className={styles.table}>
       <thead>
         <tr>
-          <th>Linhas</th> {/* Cabeçalho para as linhas */}
+          <th>Respostas</th> {/* Cabeçalho para as linhas */}
           {frequenciasObservadas.colunas.map((col, colIndex) => (
             <th key={`col-${colIndex}`}>{col}</th> // Colunas baseadas nos valores do JSON
           ))}
         </tr>
       </thead>
       <tbody>
-        {newObservedMatrix.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            <td>{`Grupo ${rowIndex + 1}`}</td> {/* Nome do grupo com base no índice da linha */}
-            {row.map((value, colIndex) => (
-              <td key={`observed-grouped-${colIndex}`}>
-                {typeof value === "number" ? value.toFixed(2) : "N/A"}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {newObservedMatrix.map((row, rowIndex) => {
+          const groupDescription = `Grupo ${rowIndex + 1}`;
+
+          // Verifica se o grupo existe
+          const groupVariables = groups[`group${rowIndex + 1}`];
+
+          // Se o grupo não existir, definimos um valor padrão vazio para as iniciais
+          const groupInitials = groupVariables 
+            ? groupVariables.map((variable) => getInitials(variable)).join(", ")
+            : "Sem Variáveis"; // Caso o grupo não tenha variáveis ou não exista
+
+          return (
+            <tr key={rowIndex}>
+              <td>{groupDescription} ({groupInitials})</td> {/* Nome do grupo e suas iniciais */}
+              {row.map((value, colIndex) => (
+                <td key={`observed-grouped-${colIndex}`}>
+                  {typeof value === "number" ? value.toFixed(2) : "N/A"}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   )}
 </div>
+
 
 
 
