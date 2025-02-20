@@ -9,8 +9,9 @@ export default function DropdownFilter({
   onSelect,
   selectedItem: propSelectedItem,
   initialSelectedIndex, // Adicionamos o índice para inicializar um valor
+  isOpened, // Novo: Prop para controlar se o dropdown está aberto
+  onToggle, // Novo: Função para notificar o componente pai sobre o clique
 }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -96,21 +97,21 @@ export default function DropdownFilter({
 
   const handleSelect = (value) => {
     setSelectedItem(value);
-    setIsOpen(false);
     if (onSelect) {
       onSelect(value);
     }
+    onToggle(); // Fecha o dropdown após a seleção
   };
 
   return (
     <div className={styles.container}>
       <button
         className={styles.dropdownButton}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle} // Usando a função onToggle passada pelo pai
       >
         {selectedItem ? selectedItem : placeholder}
       </button>
-      {isOpen && (
+      {isOpened && ( // Usando isOpened para controlar a visibilidade
         <div className={styles.dropdown}>
           {loading && <div className={styles.loading}>Carregando...</div>}
           {error && <div className={styles.error}>{error}</div>}
@@ -126,7 +127,7 @@ export default function DropdownFilter({
                 return (
                   <li
                     key={index}
-                    onClick={() => handleSelect(displayValue)}
+                    onClick={() => handleSelect(displayValue)} // Chama handleSelect diretamente
                     className={styles.dropdownItem}
                   >
                     {displayValue}

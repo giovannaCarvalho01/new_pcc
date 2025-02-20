@@ -14,7 +14,11 @@ export default function Sidebar({ onFilterApply }) {
   const [cursoSelecionado, setCursoSelecionado] = useState(null);
   // Estado para controle do pop-up
   const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState("");
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const handleToggleDropdown = (dropdownId) => {
+    setOpenDropdown(openDropdown === dropdownId ? null : dropdownId);
+  };
 
   // Função para tratar a seleção do ano e resetar filtros subsequentes
   const handleAnoSelecionado = (ano) => {
@@ -115,6 +119,8 @@ export default function Sidebar({ onFilterApply }) {
         onSelect={handleAnoSelecionado}
         coluna="ano"
         selectedItem={anoSelecionado}  // Passando selectedItem para garantir que o valor esteja sincronizado
+        isOpened={openDropdown === "ano"}
+        onToggle={() => handleToggleDropdown("ano")}
       />
       {/* Exibe o pop-up se o estado showPopup for true */}
       {showPopup && (
@@ -138,6 +144,8 @@ export default function Sidebar({ onFilterApply }) {
             placeholder="Selecione a região"
             queryParams={`coluna=dsc_regiao&ano=${anoSelecionado}`}
             selectedItem={regiaoSelecionado}  // Passando selectedItem para a região
+            isOpened={openDropdown === "regiao"}
+            onToggle={() => handleToggleDropdown("regiao")}
           />
         </>
       )}
@@ -151,6 +159,8 @@ export default function Sidebar({ onFilterApply }) {
             onSelect={handleUFSelecionado}
             placeholder="Selecione a UF"
             queryParams={`coluna=dsc_uf&ano=${anoSelecionado}&regiao=${regiaoSelecionado}`}
+            isOpened={openDropdown === "uf"}
+            onToggle={() => handleToggleDropdown("uf")}
           />
         </>
       )}
@@ -164,6 +174,8 @@ export default function Sidebar({ onFilterApply }) {
             onSelect={handleMunicipioSelecionado}
             placeholder="Selecione o município"
             queryParams={`coluna=dsc_municipio&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}`}
+            isOpened={openDropdown === "municipio"}
+            onToggle={() => handleToggleDropdown("municipio")}
           />
         </>
       )}
@@ -177,6 +189,8 @@ export default function Sidebar({ onFilterApply }) {
             onSelect={handleCatAdmSelecionado}
             placeholder="Selecione a categoria adm"
             queryParams={`coluna=dsc_cat_adm&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}`}
+            isOpened={openDropdown === "cat_adm"}
+            onToggle={() => handleToggleDropdown("cat_adm")}
           />
         </>
       )}
@@ -190,6 +204,8 @@ export default function Sidebar({ onFilterApply }) {
             onSelect={handleIesSelecionado}
             placeholder="Selecione a IES"
             queryParams={`coluna=cod_ies&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}`}
+            isOpened={openDropdown === "ies"}
+            onToggle={() => handleToggleDropdown("ies")}
           />
         </>
       )}
@@ -203,6 +219,8 @@ export default function Sidebar({ onFilterApply }) {
             onSelect={handleCursoSelecionado}
             placeholder="Selecione o curso"
             queryParams={`coluna=dsc_grupo&ano=${anoSelecionado}&regiao=${regiaoSelecionado}&uf=${ufSelecionado}&municipio=${municipioSelecionado}&cat_adm=${catAdmSelecionado}&cod_ies=${iesSelecionado}`}
+            isOpened={openDropdown === "curso"}
+            onToggle={() => handleToggleDropdown("curso")}
           />
         </>
       )}
