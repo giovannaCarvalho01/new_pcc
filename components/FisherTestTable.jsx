@@ -1,6 +1,6 @@
 import React from "react";
 
-const FisherTestTable = ({ fisherResult }) => {
+const FisherTestTable = ({ fisherResult, alfa }) => {
   const {
     metodo,
     valor_p,
@@ -40,7 +40,11 @@ const FisherTestTable = ({ fisherResult }) => {
           {/* Resultado Significativo */}
           <tr>
             <td style={{ padding: "5px" }}><strong>Resultado Significativo</strong></td>
-            <td style={{ padding: "5px" }}>{resultado_significativo ? "Sim" : "Não"}</td>
+            <td style={{ padding: "5px" }}>
+              {resultado_significativo
+                ? `O p-valor ${valor_p.toFixed(8)} é menor que o alfa (${alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.`
+                : `O p-valor (${valor_p.toFixed(8)}) é maior que o alfa (${alfa}), portanto, a nota do Enade é independente do agrupamento realizado.`}
+            </td>
           </tr>
         </tbody>
       </table>

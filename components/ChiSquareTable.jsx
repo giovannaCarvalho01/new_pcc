@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChiSquareTable = ({ chiSquareResult }) => {
+const ChiSquareTable = ({ chiSquareResult, alfa }) => {
   const {
     qui2,
     valor_p,
@@ -32,7 +32,7 @@ const ChiSquareTable = ({ chiSquareResult }) => {
           </tr>
           <tr>
             <td style={{ padding: "5px" }}><strong>Valor-p</strong></td>
-            <td style={{ padding: "5px" }}>{valor_p}</td>
+            <td style={{ padding: "5px" }}>{valor_p.toFixed(8)}</td>
           </tr>
           <tr>
             <td style={{ padding: "5px" }}><strong>Graus de Liberdade</strong></td>
@@ -40,7 +40,12 @@ const ChiSquareTable = ({ chiSquareResult }) => {
           </tr>
           <tr>
             <td style={{ padding: "5px" }}><strong>Resultado Significativo</strong></td>
-            <td style={{ padding: "5px" }}>{resultado_significativo ? "Sim" : "Não"}</td>
+            <td style={{ padding: "5px" }}>
+              {resultado_significativo
+                ? `O p-valor ${valor_p.toFixed(8)} é menor que o alfa (${alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.`
+                : `O p-valor (${valor_p.toFixed(8)}) é maior que o alfa (${alfa}), portanto, a nota do Enade é independente do agrupamento realizado.`}
+            </td>
+
           </tr>
         </tbody>
       </table>
