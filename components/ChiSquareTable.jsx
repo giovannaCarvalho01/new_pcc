@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChiSquareTable = ({ chiSquareResult, alfa }) => {
+const ChiSquareTable = ({ chiSquareResult, alfa, outliers }) => {
   const {
     qui2,
     valor_p,
@@ -10,6 +10,13 @@ const ChiSquareTable = ({ chiSquareResult, alfa }) => {
 
   return (
     <div>
+      <div className="fieldDescriptionContainer">
+        <h3>Resultados do Qui-Quadrado: 
+        {outliers && outliers.length > 0 && (
+            <i className="infoIcon" title="Análise realizada com a exclusão do(s) outlier(s)."> i </i>
+          )}
+        </h3>
+      </div>
       <table
         style={{
           margin: "20px auto",

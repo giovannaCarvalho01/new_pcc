@@ -1,6 +1,6 @@
 import React from "react";
 
-const FisherTestTable = ({ fisherResult, alfa }) => {
+const FisherTestTable = ({ fisherResult, alfa, outliers }) => {
   const {
     metodo,
     valor_p,
@@ -9,6 +9,13 @@ const FisherTestTable = ({ fisherResult, alfa }) => {
 
   return (
     <div>
+      <div className="fieldDescriptionContainer">
+        <h3>Resultados do Teste de Fisher: 
+        {outliers && outliers.length > 0 && (
+            <i className="infoIcon" title="Análise realizada com a exclusão do(s) outlier(s)."> i </i>
+          )}
+        </h3>
+      </div>
       <table
         style={{
           margin: "20px auto",

@@ -11,22 +11,25 @@ const BoxPlotChart = dynamic(() => import("../components/BoxPlotChart"), {
 export default function Results({ data, outliers, limites, chiSquareResult, fisherResult, alfa }) {
   return (
     <div className="main">
+      <h3>Gráfico de Boxplot:</h3>
       <div className="superiorAnalise">
         <BoxPlotChart data={data} outliers={outliers} limites={limites} />
+      </div>
+      <div className="inferiorAnalise">
         {chiSquareResult && (
           <ChiSquareTable
             chiSquareResult={chiSquareResult} // Passa o objeto completo para o componente
             alfa={alfa}
+            outliers={outliers}
           />
         )}
         {fisherResult && (
           <FisherTestTable
             fisherResult={fisherResult} // Passa o objeto completo para o componente Fisher
             alfa={alfa}
+            outliers={outliers}
           />
         )}
-      </div>
-      <div className="inferiorAnalise">
         {chiSquareResult && (
           <>
             <FrequencyTable

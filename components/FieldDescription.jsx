@@ -3,7 +3,7 @@ import styles from "../styles/FieldDescription.module.css"; // Importação do C
 export default function FieldDescription({ description, ativo, info }) {
   return (
     <div className={styles.fieldDescriptionContainer}>
-      <span className={styles.fieldLabel}>
+      <h4 className={styles.fieldLabel}>
         {description}
         {/* Condicionalmente exibe o ícone "i" apenas se ativo for true */}
         {ativo && (
@@ -11,7 +11,7 @@ export default function FieldDescription({ description, ativo, info }) {
             i
           </i>
         )}
-      </span>
+      </h4>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import styles from "../styles/Agrupamento.module.css";
 import jstat from "jstat"; // Importando a biblioteca jstat
 import ChiSquareTable from "../components/ChiSquareTable";
 import dynamic from "next/dynamic";
-
+import FieldDescription from "./FieldDescription";
 
 const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outliers, limites, alfa}) => {
   const [numGroups, setNumGroups] = useState(1);
@@ -391,7 +391,13 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
         <div>
           <h3>Gráfico Boxplot:</h3>
           <BoxPlotChart data={data} outliers={outliers} limites={limites} />
-          <h3>Resultados do Qui-Quadrado:</h3>
+          <div className="fieldDescriptionContainer">
+            <h3>Resultados do Qui-Quadrado: 
+            {outliers && outliers.length > 0 && (
+                <i className="infoIcon" title="Análise realizada com a exclusão do(s) outlier(s)."> i </i>
+              )}
+            </h3>
+          </div>
           <p>Qui-Quadrado: {chiSquareResults.chi2.toFixed(2)}</p>
           <p>Graus de Liberdade: {chiSquareResults.dof}</p>
           <p>Alfa: {alfa}</p>
