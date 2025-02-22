@@ -14,6 +14,11 @@ const MainAnalise = ({ filters }) => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [isValid, setIsValid] = useState(true); // Flag para validações gerais
   const [loading, setLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   // Nova validação da regra de Siegel
   const validateSiegelConditions = (matrix) => {
@@ -121,22 +126,47 @@ const MainAnalise = ({ filters }) => {
   ) {
     return (
       <div className="main">
-          <div className="explanation">
-          <h3>Sobre o teste Qui-Quadrado</h3>
-          <p>
-          O teste de Qui-Quadrado (𝜒2) é um teste estatístico usado para avaliar se existe uma associação significativa entre variáveis categóricas ou se a distribuição observada dos dados difere de uma distribuição esperada. 
-            O teste pode ser aplicado apenas quando as seguintes condições são atendidas:
-          </p>
-          <ul>
-            <li>1. O número de células com frequência esperada inferior a 5 deve ser inferior a 20% do total de células.</li>
-            <li>2. Nenhuma célula pode ter uma frequência esperada inferior a 1.</li>
-          </ul>
-          <p>
-            Caso essas condições não sejam atendidas com os dados na forma original, o pesquisador deve considerar combinar categorias adjacentes para aumentar as frequências esperadas nas células.
-          </p>
-          <p><strong>Exemplo:</strong> Uma alternativa seria combinar as categorias "Concordo", "Concordo Parcialmente" e "Concordo Totalmente", ou "Discordo", "Discordo Parcialmente" e "Discordo Totalmente", a fim de adequar os dados para o teste [Siegel, 1975].
-          </p>
-        </div>
+    <div className="main">
+      <div className="explanation">
+        <h3>Sobre o teste Qui-Quadrado</h3>
+        {isExpanded && (
+          <div className="content">
+            <p>
+              O teste de Qui-Quadrado (𝜒2) é um teste estatístico usado para
+              avaliar se existe uma associação significativa entre variáveis
+              categóricas ou se a distribuição observada dos dados difere de
+              uma distribuição esperada. O teste pode ser aplicado apenas
+              quando as seguintes condições são atendidas:
+            </p>
+            <ul>
+              <li>
+                1. O número de células com frequência esperada inferior a 5
+                deve ser inferior a 20% do total de células.
+              </li>
+              <li>
+                2. Nenhuma célula pode ter uma frequência esperada inferior a
+                1.
+              </li>
+            </ul>
+            <p>
+              Caso essas condições não sejam atendidas com os dados na forma
+              original, o pesquisador deve considerar combinar categorias
+              adjacentes para aumentar as frequências esperadas nas células.
+            </p>
+            <p>
+              <strong>Exemplo:</strong> Uma alternativa seria combinar as
+              categorias "Concordo", "Concordo Parcialmente" e "Concordo
+              Totalmente", ou "Discordo", "Discordo Parcialmente" e "Discordo
+              Totalmente", a fim de adequar os dados para o teste [Siegel,
+              1975].
+            </p>
+          </div>
+        )}
+        <button onClick={toggleExpand} className="toggle-button">
+          {isExpanded ? "Recolher" : "Expandir"}
+        </button>
+      </div>
+    </div>
         <Agrupamento frequenciasEsperadas={chiSquareResult.frequencias_esperadas} 
         frequenciasObservadas={chiSquareResult.frequencias_observadas}
         data={data}
