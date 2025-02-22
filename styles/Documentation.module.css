@@ -36,3 +36,13 @@
 .section {
     margin-bottom: 1.5em;
 }
+
+.ul_doc {
+    list-style-type: disc; /* Define o estilo dos marcadores como discos */
+    margin-left: 20px;     /* Adiciona espaço à esquerda para o alinhamento dos marcadores */
+    padding-left: 20px;    /* Adiciona preenchimento interno à esquerda */
+}
+
+.li_doc {
+    margin-bottom: 8px;    /* Adiciona espaçamento entre os itens da lista */
+}
