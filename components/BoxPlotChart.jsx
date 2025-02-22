@@ -47,10 +47,10 @@ const BoxPlotChart = ({ data, outliers, limites }) => {
         foreColor: "#333",
       },
       colors: ["#007BFF", "#1E90FF"], // Tons de azul para BoxPlot e marcadores
-      title: {
-        text: "BoxPlot",
-        align: "left",
-      },
+      // title: {
+      //   text: "BoxPlot",
+      //   align: "left",
+      // },
       tooltip: {
         shared: false,
         intersect: true,

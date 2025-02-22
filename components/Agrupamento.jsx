@@ -389,6 +389,7 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
 
       {chiSquareResults && (
         <div>
+          <h3>Gráfico Boxplot:</h3>
           <BoxPlotChart data={data} outliers={outliers} limites={limites} />
           <h3>Resultados do Qui-Quadrado:</h3>
           <p>Qui-Quadrado: {chiSquareResults.chi2.toFixed(2)}</p>
@@ -405,9 +406,9 @@ const Agrupamento = ({ frequenciasEsperadas, frequenciasObservadas, data,  outli
       {/* Condicional para exibir a mensagem baseada no p-valor */}
       {pValue !== null && (
         pValue < alfa ? (
-          <p> O p-valor ({pValue.toFixed(8)}) é menor que o alfa ({alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.</p>
+          <p>Conclusão: O p-valor ({pValue.toFixed(8)}) é menor que o alfa ({alfa}), portanto, a nota do Enade é dependente do agrupamento realizado.</p>
         ) : (
-          <p> O p-valor ({pValue.toFixed(8)}) é maior que o alfa ({alfa}), portanto, nota do Enade é independente do agrupamento realizado.</p>
+          <p>Conclusão: O p-valor ({pValue.toFixed(8)}) é maior que o alfa ({alfa}), portanto, nota do Enade é independente do agrupamento realizado.</p>
         )
       )}
 

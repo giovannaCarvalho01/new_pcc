@@ -122,9 +122,10 @@ const MainAnalise = ({ filters }) => {
     return (
       <div className="main">
           <div className="explanation">
-          <h3>Explicação sobre o teste Qui-Quadrado</h3>
+          <h3>Sobre o teste Qui-Quadrado</h3>
           <p>
-            O <strong>teste Qui-Quadrado</strong> pode ser aplicado apenas quando as seguintes condições são atendidas:
+          O teste de Qui-Quadrado (𝜒2) é um teste estatístico usado para avaliar se existe uma associação significativa entre variáveis categóricas ou se a distribuição observada dos dados difere de uma distribuição esperada. 
+            O teste pode ser aplicado apenas quando as seguintes condições são atendidas:
           </p>
           <ul>
             <li>1. O número de células com frequência esperada inferior a 5 deve ser inferior a 20% do total de células.</li>

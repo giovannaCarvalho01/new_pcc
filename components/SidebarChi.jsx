@@ -174,8 +174,8 @@ export default function SidebarChi({ onFilterApply }) {
           <div className="modalContent">
             <h2>Aviso</h2>
             <p> Você selecionou um ano que já conta com as mudanças nos arquivos do Enade para atender a LGPD. Conforme descrito pelo Inep:</p>
-            <p>Ressalta-se que a nova estrutura dos Microdados do Enade permite ao pesquisador realizar estudos em relação ao perfil dos cursos e seus resultados, sendo possível agrupar os diferentes arquivos pelo código de curso (CO_CURSO).</p>
-            <p><strong>No entanto, não é possível agrupar as informações no nível de estudante, considerando que cada arquivo está ordenado por variáveis distintas.</strong> Por exemplo, mesmo reordenando por código de curso todos os arquivos, os dados da primeira linha de um dos arquivos não se referem ao mesmo indivíduo dos dados da primeira linha de outro arquivo.</p>
+            <p>"Ressalta-se que a nova estrutura dos Microdados do Enade permite ao pesquisador realizar estudos em relação ao perfil dos cursos e seus resultados, sendo possível agrupar os diferentes arquivos pelo código de curso (CO_CURSO).</p>
+            <p><strong>No entanto, não é possível agrupar as informações no nível de estudante, considerando que cada arquivo está ordenado por variáveis distintas.</strong> Por exemplo, mesmo reordenando por código de curso todos os arquivos, os dados da primeira linha de um dos arquivos não se referem ao mesmo indivíduo dos dados da primeira linha de outro arquivo."</p>
             <button onClick={() => setShowPopup(false)}>Fechar</button>
           </div>
         </div>
