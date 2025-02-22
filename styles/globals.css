@@ -352,6 +352,17 @@ a {
 }
 
 /*  */
+.reference-link {
+  color: #007bff; /* Azul padrão para links */
+  text-decoration: underline; /* Para indicar claramente que é um link */
+  cursor: pointer; /* Mostra o cursor de link */
+  margin-left: 0.3em; /* Adiciona espaçamento à esquerda */
+  margin-right: 0.3em; /* Adiciona espaçamento à direita (caso queira mais espaço) */
+}
+
+.reference-link:hover {
+  color: #0056b3; /* Cor mais escura ao passar o mouse */
+}
 
 
 /* Tablet */

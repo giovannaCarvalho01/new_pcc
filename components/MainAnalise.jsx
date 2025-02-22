@@ -4,6 +4,18 @@ import Agrupamento from "../components/Agrupamento";
 import Results from "../components/Results";
 import { API_BASE_URL_PRD } from "../config";
 
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modalOverlay">
+      <div className="modalContent">
+        {children}
+      </div>
+    </div>
+  );
+};
+
 const MainAnalise = ({ filters }) => {
   const [data, setData] = useState([]);
   const [outliers, setOutliers] = useState([]);
@@ -15,6 +27,7 @@ const MainAnalise = ({ filters }) => {
   const [isValid, setIsValid] = useState(true); // Flag para validações gerais
   const [loading, setLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showReferenceModal, setShowReferenceModal] = useState(false); // Estado para o modal da referência
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -157,8 +170,12 @@ const MainAnalise = ({ filters }) => {
               <strong>Exemplo:</strong> Uma alternativa seria combinar as
               categorias "Concordo", "Concordo Parcialmente" e "Concordo
               Totalmente", ou "Discordo", "Discordo Parcialmente" e "Discordo
-              Totalmente", a fim de adequar os dados para o teste [Siegel,
-              1975].
+              Totalmente", a fim de adequar os dados para o teste
+              <a href="#" onClick={() => setShowReferenceModal(true)}
+                className="reference-link"
+              >
+                [Siegel, 1975]
+              </a>.
             </p>
           </div>
         )}
@@ -166,6 +183,16 @@ const MainAnalise = ({ filters }) => {
           {isExpanded ? "Recolher" : "Expandir"}
         </button>
       </div>
+      <Modal isOpen={showReferenceModal} onClose={() => setShowReferenceModal(false)}>
+      <h2>Referência</h2>
+      <p>
+        Siegel, S. (1975). Estatística não-paramétrica para ciências do comportamento. 
+        McGraw-Hill.
+      </p>
+      <button onClick={() => setShowReferenceModal(false)} className="close-button">
+        Fechar
+      </button>
+      </Modal>
     </div>
         <Agrupamento frequenciasEsperadas={chiSquareResult.frequencias_esperadas} 
         frequenciasObservadas={chiSquareResult.frequencias_observadas}
