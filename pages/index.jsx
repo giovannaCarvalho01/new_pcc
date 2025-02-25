@@ -50,7 +50,7 @@ export default function Documentation() {
                         <h2 className={styles.subtitle}>Créditos</h2>
                         <p className={styles.paragraph}>
                             Esse sistema é de autorida de Giovanna Alves Vital de Carvalho, bacharelanda em Sistemas de Informação da Unidade Acadêmica de Serra Talhada (UAST) da Universidade Federal Rural de Pernambuco (UFRPE),
-                            sob a orientação do Prof. Richarlyson Alves D'Emery (UAST - UFRPE), como resultado do Trabalho de Conclusão de Curso.
+                            sob a orientação do Prof. Dr. Richarlyson Alves D'Emery (UAST - UFRPE), como resultado do Trabalho de Conclusão de Curso.
                         </p>
                     </section>
 
