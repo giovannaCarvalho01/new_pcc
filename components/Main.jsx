@@ -1,4 +1,6 @@
 import PizzaChart from "../components/PizzaChart";
+import PieChart from "../components/PieChart";
+import BarVerticalChart from "../components/BarVerticalChart";
 
 export default function Main({ filters }) {
   console.log("Props filters no Main:", filters); // Logando os filtros no Main
@@ -17,15 +19,15 @@ export default function Main({ filters }) {
       <div className="superior">
         <div className="grafico">
           <h4>Gráfico por Gênero</h4>
-          <PizzaChart filters={filters} variavel={"sexo"} />
+          <BarVerticalChart filters={filters} variavel={"sexo"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Cotas</h4>
-          <PizzaChart filters={filters} variavel={"cotista"} />
+          <PieChart filters={filters} variavel={"cotista"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Raça</h4>
-          <PizzaChart filters={filters} variavel={"raca"} />
+          <PieChart filters={filters} variavel={"raca"} />
         </div>
         {/* <PizzaChart filters={filters} variavel={"estado_civil_dsc"} /> */}
       </div>
@@ -41,18 +43,18 @@ export default function Main({ filters }) {
         </div>
         <div className="grafico">
           <h4>Gráfico por Turno</h4>
-          <PizzaChart filters={filters} variavel={"dsc_turno"} />
+          <BarVerticalChart filters={filters} variavel={"dsc_turno"} />
         </div>
       </div>
 
       <div className="superior" style={{ width: "100%" }}>
         <div className="grafico">
           <h4>Gráfico por Horas Trabalhadas</h4>
-          <PizzaChart filters={filters} variavel={"trabalha"} />
+          <PieChart filters={filters} variavel={"trabalha"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Quantidade de Livros Lidos</h4>
-          <PizzaChart filters={filters} variavel={"qtd_livros"} />
+          <PieChart filters={filters} variavel={"qtd_livros"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Horas de Estudos</h4>
@@ -63,15 +65,15 @@ export default function Main({ filters }) {
       <div className="superior" style={{ width: "100%" }}>
         <div className="grafico">
           <h4>Gráfico por Estado Civil</h4>
-          <PizzaChart filters={filters} variavel={"estado_civil"} />
+          <PieChart filters={filters} variavel={"estado_civil"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Tipo de Moradia</h4>
-          <PizzaChart filters={filters} variavel={"tipo_moradia"} />
+          <PieChart filters={filters} variavel={"tipo_moradia"} />
         </div>
         <div className="grafico">
           <h4>Gráfico por Quantidade de Moradores</h4>
-          <PizzaChart filters={filters} variavel={"qtd_moradores"} />
+          <PieChart filters={filters} variavel={"qtd_moradores"} />
         </div>
       </div>  
 
