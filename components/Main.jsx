@@ -1,10 +1,16 @@
-import PizzaChart from "../components/PizzaChart";
-import PieChart from "../components/PieChart";
-import BarVerticalChart from "../components/BarVerticalChart";
+// import PizzaChart from "../components/PizzaChart";
+// import PieChart from "../components/PieChart";
+// import BarVerticalChart from "../components/BarVerticalChart";
+import dynamic from 'next/dynamic';
+
+const PizzaChart = dynamic(() => import('../components/PizzaChart'), { ssr: false });
+const PieChart = dynamic(() => import('../components/PieChart'), { ssr: false });
+const BarVerticalChart = dynamic(() => import('../components/BarVerticalChart'), { ssr: false });
 
 export default function Main({ filters }) {
   console.log("Props filters no Main:", filters); // Logando os filtros no Main
 
+  
   // Verifica se os filtros estão aplicados e se a variável foi passada
   if (!filters || Object.keys(filters).length === 0) {
     return (
