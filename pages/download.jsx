@@ -1,5 +1,5 @@
 import Menu from "../components/Menu";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SidebarDown";
 import MainDownload from "../components/MainDownload";
 import { useState } from "react";
 

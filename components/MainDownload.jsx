@@ -25,6 +25,7 @@ export default function MainDownload({ filters }) {
         cod_ies: filters.ies,
         grp: filters.curso,
         presenca: 555,
+        all: filters.all,
       }).toString();
 
       const response = await axios.get(`${API_BASE_URL_PRD}notas/download?${queryParams}`, {
@@ -66,6 +67,7 @@ export default function MainDownload({ filters }) {
         cod_ies: filters.ies,
         grp: filters.curso,
         presenca: 555,
+        all: filters.all,
       }).toString();
   
       const response = await axios.get(`${API_BASE_URL_PRD}notas/download/csv?${queryParams}`, {
